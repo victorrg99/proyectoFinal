@@ -40,10 +40,10 @@ namespace ProyectoFinal_ERP_Academia.Util.Managers
             data = connection.getData("SELECT DISTINCT ROL, ID_ROL FROM ROLES ORDER BY ID_ROL", "ROLES");
             AddRoles(data);
         }
-        public void AddUser(String nombre,String clave,int rol) {
+        public void AddUser(String dni,String nombre,String apellido,String clave,int rol) {
             String id = connection.DLookUp("COUNT(id_usuario)", "usuarios", "").ToString();
             int iId = int.Parse(id) + 1;
-            connection.setData("insert into USUARIOS (ID_USUARIO,NOMBRE,CLAVE,ID_ROL,ELIMINADO) values(" + iId + ",'" + nombre + "','" + clave + "','" + rol + "',0)");
+            connection.setData("insert into USUARIOS (ID_USUARIO,DNI,NOMBRE,APELLIDO,CLAVE,ID_ROL,ELIMINADO) values(" + iId + ",'"+dni+"','"+nombre+"','" + apellido + "','" + clave + "','" + rol + "',0)");
         }
     }
 }

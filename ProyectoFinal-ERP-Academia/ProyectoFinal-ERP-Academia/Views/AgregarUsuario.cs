@@ -14,7 +14,9 @@ namespace ProyectoFinal_ERP_Academia.Views
 {
     public partial class AgregarUsuario : Form
     {
+        String dni;
         String nombre;
+        String apellido;
         String clave;
         int rol;
         ManagerUsuario mu;
@@ -31,35 +33,52 @@ namespace ProyectoFinal_ERP_Academia.Views
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            
 
-            if (Util.Util.validarNombreApellido(tbNombre.Text))
+
+            if (Util.Util.validarDNI(tbDNI.Text))
             {
-                if (tbClave.Text != "")
+                if (Util.Util.validarNombreApellido(tbNombre.Text))
                 {
-                    if (cbRoles.SelectedIndex >= 0)
+                    if (Util.Util.validarNombreApellido(tbApellido.Text))
                     {
-                        nombre = tbNombre.Text;
-                        clave = Encryptor.MD5Hash(tbClave.Text);
-                        rol = cbRoles.SelectedIndex;
-                        rol += 1;
-                        mu.AddUser(nombre, clave, rol);
-                        MessageBox.Show(usuarioCreado);
-                        this.Dispose();
+
+                        if (tbClave.Text != "")
+                        {
+                            if (cbRoles.SelectedIndex >= 0)
+                            {
+                                dni = tbDNI.Text;
+                                nombre = tbNombre.Text;
+                                apellido = tbApellido.Text;
+                                clave = Encryptor.MD5Hash(tbClave.Text);
+                                rol = cbRoles.SelectedIndex;
+                                rol += 1;
+                                mu.AddUser(dni, nombre,apellido, clave, rol);
+                                MessageBox.Show(usuarioCreado);
+                                this.Dispose();
+                            }
+                            else
+                            {
+                                MessageBox.Show("ERROR-Selecciona un rol");
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show("ERROR-La contraseña no puede estar vacía");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("ERROR-Selecciona un rol");
+                        MessageBox.Show("ERROR-Formato de apellido incorrecto");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("ERROR-La contraseña no puede estar vacía");
+                    MessageBox.Show("ERROR-Formato de nombre incorrecto");
                 }
             }
             else
             {
-                MessageBox.Show("ERROR-Formato de nombre incorrecto");
+                MessageBox.Show("ERROR-Formato de dni incorrecto");
             }
 
 
@@ -69,6 +88,11 @@ namespace ProyectoFinal_ERP_Academia.Views
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Dispose();
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
