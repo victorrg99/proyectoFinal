@@ -1,4 +1,5 @@
-﻿using ProyectoFinal_ERP_Academia.Util;
+﻿using ProyectoFinal_ERP_Academia.Conexion;
+using ProyectoFinal_ERP_Academia.Util;
 using ProyectoFinal_ERP_Academia.Util.Managers;
 using System;
 using System.Collections.Generic;
@@ -19,14 +20,14 @@ namespace ProyectoFinal_ERP_Academia.Views
         String apellido;
         String clave;
         int rol;
-        ManagerUsuario mu;
+        ConnectOracle mu;
         String usuarioCreado;
         public AgregarUsuario()
         {
             InitializeComponent();
-            mu = new ManagerUsuario();
+            mu = new ConnectOracle();
             mu.getRoles();
-            ManagerUsuario.RoleList.ForEach(x => this.cbRoles.Items.Add(x.NombreRol));
+            ConnectOracle.RoleList.ForEach(x => this.cbRoles.Items.Add(x.NombreRol));
             usuarioCreado = "Usuario creado correctamente";
 
         }

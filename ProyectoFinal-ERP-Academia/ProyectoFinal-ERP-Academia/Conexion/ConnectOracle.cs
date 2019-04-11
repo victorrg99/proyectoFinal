@@ -1,4 +1,5 @@
 ﻿using Oracle.DataAccess.Client;
+using ProyectoFinal_ERP_Academia.Util.Clases;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -18,6 +19,12 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         + "User Id=ProyectoFinal; Password=123456;";
 
         ////////////////////////////////////////////////////////////
+        //Atributos
+        private DataTable usersTable;
+        private static List<Rol> roleTable;
+
+
+        ///////////////////////////////////////////////////////////
 
         /**
          * Method to retrieve a set of data
@@ -96,6 +103,35 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             }
             objConexion.Close();
             return resultado;
+        }
+
+        public static List<Rol> RoleList
+        {
+            get { return roleTable; }
+            set { roleTable = value; }
+        }
+        public void AddRoles(DataSet data)
+        {
+            List<Rol> ps = new List<Rol>();
+
+            foreach (DataRow dr in data.Tables["ROLES"].Rows)
+            {
+                ps.Add(new Rol(dr["ROL"].ToString()));
+            }
+
+            roleTable = ps;
+        }
+        public void getRoles()
+        {
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT ROL, ID_ROL FROM ROLES ORDER BY ID_ROL", "ROLES");
+            AddRoles(data);
+        }
+        public void AddUser(String dni, String nombre, String apellido, String clave, int rol)
+        {
+            String id = DLookUp("COUNT(id_usuario)", "usuarios", "").ToString();
+            int iId = int.Parse(id) + 1;
+            setData("insert into USUARIOS (ID_USUARIO,DNI,NOMBRE,APELLIDO,CLAVE,ID_ROL,ELIMINADO) values(" + iId + ",'" + dni + "','" + nombre + "','" + apellido + "','" + clave + "','" + rol + "',0)");
         }
     }
 }
