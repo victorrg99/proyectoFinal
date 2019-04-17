@@ -1,6 +1,5 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
 using ProyectoFinal_ERP_Academia.Util;
-using ProyectoFinal_ERP_Academia.Util.Managers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -20,13 +19,13 @@ namespace ProyectoFinal_ERP_Academia.Views
         String apellido;
         String clave;
         int rol;
-        ConnectOracle mu;
+        ConnectOracle co;
         String usuarioCreado;
         public AgregarUsuario()
         {
             InitializeComponent();
-            mu = new ConnectOracle();
-            mu.getRoles();
+            co = new ConnectOracle();
+            co.getRoles();
             ConnectOracle.RoleList.ForEach(x => this.cbRoles.Items.Add(x.NombreRol));
             usuarioCreado = "Usuario creado correctamente";
 
@@ -53,7 +52,7 @@ namespace ProyectoFinal_ERP_Academia.Views
                                 clave = Encryptor.MD5Hash(tbClave.Text);
                                 rol = cbRoles.SelectedIndex;
                                 rol += 1;
-                                mu.AddUser(dni, nombre,apellido, clave, rol);
+                                co.AddUser(dni, nombre,apellido, clave, rol);
                                 MessageBox.Show(usuarioCreado);
                                 this.Dispose();
                             }

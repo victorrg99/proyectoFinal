@@ -105,6 +105,23 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             return resultado;
         }
 
+
+        //Usuarios
+
+        public DataTable TablaUsuarios
+        {
+            get { return usersTable; }
+            set { usersTable = value; }
+        }
+
+        public void LeerTodosUsuarios()
+        {
+            DataSet data = new DataSet();
+            ConnectOracle query = new ConnectOracle();
+            data = query.getData("Select ID_USUARIO,DNI,NOMBRE,APELLIDO,ID_ROL,ELIMINADO from USUARIOS", "USUARIOS");
+            usersTable = data.Tables["USUARIOS"];
+        }
+
         public static List<Rol> RoleList
         {
             get { return roleTable; }

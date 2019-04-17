@@ -1,6 +1,4 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
-using ProyectoFinal_ERP_Academia.Util.Clases;
-using ProyectoFinal_ERP_Academia.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,16 +9,22 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace ProyectoFinal_ERP_Academia
+namespace ProyectoFinal_ERP_Academia.Views
 {
-    public partial class Form1 : Form
+    public partial class Usuarios : Form
     {
-        
-        
-        public Form1()
+        ConnectOracle co;
+        public Usuarios()
         {
             InitializeComponent();
+            co = new ConnectOracle();
+            RefrescarTabla();
         }
+        private void RefrescarTabla()
+        {
+            co.LeerTodosUsuarios();
+            dgvUsuarios.DataSource = co.TablaUsuarios;
+        }  
 
         private void button1_Click(object sender, EventArgs e)
         {
