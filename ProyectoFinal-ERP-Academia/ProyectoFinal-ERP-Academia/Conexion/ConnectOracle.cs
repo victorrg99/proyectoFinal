@@ -1,4 +1,5 @@
 ﻿using Oracle.DataAccess.Client;
+using ProyectoFinal_ERP_Academia.Util;
 using ProyectoFinal_ERP_Academia.Util.Clases;
 using System;
 using System.Collections.Generic;
@@ -22,6 +23,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         //Atributos
         private DataTable usersTable;
         private static List<Rol> roleTable;
+        
 
 
         ///////////////////////////////////////////////////////////
@@ -105,6 +107,22 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             return resultado;
         }
 
+        //Inicio de Sesion
+        Boolean inicioSesion = false;
+        public Boolean IniciarSesion(String dni,String nombre,String c)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            String clave = Encryptor.MD5Hash(c);
+            data = query.getData("Select count(ID_USUARIO) from USUARIOS where UPPER(DNI) like upper('"+dni+"') and  NOMBRE = '"+nombre+"' and CLAVE = '"+clave+"'", "USUARIOS");
+            usersTable = data.Tables["USUARIOS"];
+            if (int.Parse(usersTable.Rows[0][0].ToString()) == 1)
+            {
+                inicioSesion = true;
+            }
+            return inicioSesion;
+        }
+
 
         //Usuarios
 
@@ -116,10 +134,26 @@ namespace ProyectoFinal_ERP_Academia.Conexion
 
         public void LeerTodosUsuarios()
         {
-            DataSet data = new DataSet();
             ConnectOracle query = new ConnectOracle();
-            data = query.getData("Select ID_USUARIO,DNI,NOMBRE,APELLIDO,ID_ROL,ELIMINADO from USUARIOS", "USUARIOS");
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_USUARIO,DNI,NOMBRE,APELLIDO,ID_ROL,ELIMINADO from USUARIOS order by ID_USUARIO", "USUARIOS");
             usersTable = data.Tables["USUARIOS"];
+        }
+
+        public Usuario buscarUsuario(int id)
+        {
+            Usuario u = new Usuario();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_USUARIO,DNI,NOMBRE,APELLIDO,ID_ROL,ELIMINADO from USUARIOS where ID_USUARIO=" + id + "", "USUARIOS");
+            usersTable = data.Tables["USUARIOS"];
+            u.Id= int.Parse(usersTable.Rows[0][0].ToString());
+            u.DNI= usersTable.Rows[0][1].ToString();
+            u.NOMBRE = usersTable.Rows[0][2].ToString();
+            u.APELLIDO= usersTable.Rows[0][3].ToString();
+            u.ROL= int.Parse(usersTable.Rows[0][4].ToString());
+            u.ELIMINADO= int.Parse(usersTable.Rows[0][5].ToString());
+            return u;
         }
 
         public static List<Rol> RoleList
@@ -140,15 +174,28 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         }
         public void getRoles()
         {
+            ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
             data = getData("SELECT DISTINCT ROL, ID_ROL FROM ROLES ORDER BY ID_ROL", "ROLES");
             AddRoles(data);
         }
-        public void AddUser(String dni, String nombre, String apellido, String clave, int rol)
+        public void AgregarUsuario(String dni, String nombre, String apellido, String clave, int rol)
         {
             String id = DLookUp("COUNT(id_usuario)", "usuarios", "").ToString();
             int iId = int.Parse(id) + 1;
             setData("insert into USUARIOS (ID_USUARIO,DNI,NOMBRE,APELLIDO,CLAVE,ID_ROL,ELIMINADO) values(" + iId + ",'" + dni + "','" + nombre + "','" + apellido + "','" + clave + "','" + rol + "',0)");
+        }
+        public void ModificarUsuario(int idU,String dni, String nombre, String apellido, int rol)
+        {
+            setData("update USUARIOS set DNI='" + dni + "',NOMBRE='" + nombre + "',APELLIDO='" + apellido + "',ID_ROL=" + rol + " where ID_USUARIO = "+idU+"");
+        }
+        public void EliminarUsuario(int idU)
+        {
+            setData("update USUARIOS set ELIMINADO=" + 1 + " where ID_USUARIO = " + idU + "");
+        }
+        public void RstaurarUsuario(int idU)
+        {
+            setData("update USUARIOS set ELIMINADO=" + 0 + " where ID_USUARIO = " + idU + "");
         }
     }
 }

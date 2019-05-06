@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoFinal_ERP_Academia.Views;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,7 @@ namespace ProyectoFinal_ERP_Academia
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Form1());
+            Application.Run(new InicioSesion());
         }
     }
 }

@@ -52,7 +52,7 @@ namespace ProyectoFinal_ERP_Academia.Views
                                 clave = Encryptor.MD5Hash(tbClave.Text);
                                 rol = cbRoles.SelectedIndex;
                                 rol += 1;
-                                co.AddUser(dni, nombre,apellido, clave, rol);
+                                co.AgregarUsuario(dni, nombre,apellido, clave, rol);
                                 MessageBox.Show(usuarioCreado);
                                 this.Dispose();
                             }
