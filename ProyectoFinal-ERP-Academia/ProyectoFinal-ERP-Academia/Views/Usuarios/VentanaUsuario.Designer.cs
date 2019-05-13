@@ -38,7 +38,7 @@
             // 
             // btAgregar
             // 
-            this.btAgregar.Location = new System.Drawing.Point(12, 52);
+            this.btAgregar.Location = new System.Drawing.Point(12, 48);
             this.btAgregar.Name = "btAgregar";
             this.btAgregar.Size = new System.Drawing.Size(75, 23);
             this.btAgregar.TabIndex = 0;
@@ -48,7 +48,7 @@
             // 
             // btMod
             // 
-            this.btMod.Location = new System.Drawing.Point(93, 52);
+            this.btMod.Location = new System.Drawing.Point(93, 48);
             this.btMod.Name = "btMod";
             this.btMod.Size = new System.Drawing.Size(75, 23);
             this.btMod.TabIndex = 1;
@@ -64,7 +64,7 @@
             this.tablaUsuarios.AllowUserToResizeRows = false;
             this.tablaUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.tablaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaUsuarios.Location = new System.Drawing.Point(12, 81);
+            this.tablaUsuarios.Location = new System.Drawing.Point(12, 77);
             this.tablaUsuarios.MultiSelect = false;
             this.tablaUsuarios.Name = "tablaUsuarios";
             this.tablaUsuarios.ReadOnly = true;
@@ -76,7 +76,7 @@
             // 
             // btElim
             // 
-            this.btElim.Location = new System.Drawing.Point(564, 52);
+            this.btElim.Location = new System.Drawing.Point(564, 48);
             this.btElim.Name = "btElim";
             this.btElim.Size = new System.Drawing.Size(75, 23);
             this.btElim.TabIndex = 3;
@@ -86,7 +86,7 @@
             // 
             // btRes
             // 
-            this.btRes.Location = new System.Drawing.Point(645, 52);
+            this.btRes.Location = new System.Drawing.Point(645, 48);
             this.btRes.Name = "btRes";
             this.btRes.Size = new System.Drawing.Size(75, 23);
             this.btRes.TabIndex = 4;
@@ -105,7 +105,7 @@
             this.Controls.Add(this.btMod);
             this.Controls.Add(this.btAgregar);
             this.Name = "VentanaUsuario";
-            this.Text = "VentanaUsuario";
+            this.Text = "Usuarios";
             ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).EndInit();
             this.ResumeLayout(false);
 

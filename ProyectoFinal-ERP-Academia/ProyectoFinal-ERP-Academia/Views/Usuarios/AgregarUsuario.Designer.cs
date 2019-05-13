@@ -44,7 +44,7 @@
             // 
             // btnCancelar
             // 
-            this.btnCancelar.Location = new System.Drawing.Point(15, 264);
+            this.btnCancelar.Location = new System.Drawing.Point(200, 264);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(75, 23);
             this.btnCancelar.TabIndex = 0;
@@ -54,7 +54,7 @@
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(200, 264);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 264);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 1;
@@ -150,7 +150,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(287, 309);
+            this.ClientSize = new System.Drawing.Size(287, 295);
             this.Controls.Add(this.tbApellido);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.tbDNI);
@@ -164,7 +164,8 @@
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnCancelar);
             this.Name = "AgregarUsuario";
-            this.Text = "AgregarUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Agregar Usuario";
             this.ResumeLayout(false);
             this.PerformLayout();
 

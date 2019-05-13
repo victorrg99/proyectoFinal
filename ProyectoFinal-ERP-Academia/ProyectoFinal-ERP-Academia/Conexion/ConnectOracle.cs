@@ -155,6 +155,19 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             u.ELIMINADO= int.Parse(usersTable.Rows[0][5].ToString());
             return u;
         }
+        public Boolean buscarUsuarioPorDNI(String dni)
+        {
+            Boolean encontrado = false;
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select count(ID_USUARIO) from USUARIOS where DNI like '" + dni + "'", "USUARIOS");
+            usersTable = data.Tables["USUARIOS"];
+            if (int.Parse(usersTable.Rows[0][0].ToString()) > 0) {
+                encontrado = true;
+            }
+            return encontrado;
+        }
+
 
         public static List<Rol> RoleList
         {

@@ -19,6 +19,7 @@ namespace ProyectoFinal_ERP_Academia.Views
         String apellido;
         String clave;
         int rol;
+        Boolean encontradoDNI;
         ConnectOracle co;
         String usuarioCreado;
         public AgregarUsuario()
@@ -37,43 +38,50 @@ namespace ProyectoFinal_ERP_Academia.Views
 
             if (Util.Util.validarDNI(tbDNI.Text))
             {
-                if (Util.Util.validarNombreApellido(tbNombre.Text))
+                if (!co.buscarUsuarioPorDNI(tbDNI.Text))
                 {
-                    if (Util.Util.validarNombreApellido(tbApellido.Text))
+                    if (Util.Util.validarNombreApellido(tbNombre.Text))
                     {
-
-                        if (tbClave.Text != "")
+                        if (Util.Util.validarNombreApellido(tbApellido.Text))
                         {
-                            if (cbRoles.SelectedIndex >= 0)
+
+                            if (tbClave.Text != "")
                             {
-                                dni = tbDNI.Text;
-                                nombre = tbNombre.Text;
-                                apellido = tbApellido.Text;
-                                clave = Encryptor.MD5Hash(tbClave.Text);
-                                rol = cbRoles.SelectedIndex;
-                                rol += 1;
-                                co.AgregarUsuario(dni, nombre,apellido, clave, rol);
-                                MessageBox.Show(usuarioCreado);
-                                this.Dispose();
+                                if (cbRoles.SelectedIndex >= 0)
+                                {
+                                    dni = tbDNI.Text;
+                                    nombre = tbNombre.Text;
+                                    apellido = tbApellido.Text;
+                                    clave = Encryptor.MD5Hash(tbClave.Text);
+                                    rol = cbRoles.SelectedIndex;
+                                    rol += 1;
+                                    co.AgregarUsuario(dni, nombre, apellido, clave, rol);
+                                    MessageBox.Show(usuarioCreado);
+                                    this.Dispose();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("ERROR-Selecciona un rol");
+                                }
                             }
                             else
                             {
-                                MessageBox.Show("ERROR-Selecciona un rol");
+                                MessageBox.Show("ERROR-La contraseña no puede estar vacía");
                             }
                         }
                         else
                         {
-                            MessageBox.Show("ERROR-La contraseña no puede estar vacía");
+                            MessageBox.Show("ERROR-Formato de apellido incorrecto");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("ERROR-Formato de apellido incorrecto");
+                        MessageBox.Show("ERROR-Formato de nombre incorrecto");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("ERROR-Formato de nombre incorrecto");
+                    MessageBox.Show("ERROR-El DNI introducido ya pertenece a un usuario");
                 }
             }
             else

@@ -21,6 +21,10 @@ namespace ProyectoFinal_ERP_Academia
         public Form1()
         {
             InitializeComponent();
+            usuariosToolStripMenuItem2.Visible = false;
+            usuariosToolStripMenuItem3.Visible = false;
+            usuariosToolStripMenuItem2.Enabled = false;
+            usuariosToolStripMenuItem3.Enabled = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -39,12 +43,21 @@ namespace ProyectoFinal_ERP_Academia
 
         private void salirToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            VentanaSalir vs = new VentanaSalir();
+            vs.ShowDialog();
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
 
+        }
+
+        private void usuariosToolStripMenuItem3_Click(object sender, EventArgs e)
+        {
+            VentanaUsuario us = new VentanaUsuario();
+            us.MdiParent = this;
+            us.Activate();
+            us.Show();
         }
     }
 }
