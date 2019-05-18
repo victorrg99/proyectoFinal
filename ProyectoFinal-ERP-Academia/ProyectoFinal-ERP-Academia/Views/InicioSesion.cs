@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
+using ProyectoFinal_ERP_Academia.Util.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -22,7 +23,6 @@ namespace ProyectoFinal_ERP_Academia.Views
         {
             InitializeComponent();
             co = new ConnectOracle();
-            ventanaPrincipal = new Form1();
         }
 
         private void btInSes_Click(object sender, EventArgs e)
@@ -45,8 +45,9 @@ namespace ProyectoFinal_ERP_Academia.Views
                     Boolean inicioSesion = co.IniciarSesion(dni, nombre, clave);
                     if (inicioSesion)
                     {
-                       ventanaPrincipal.Show();
-                       ventanaPrincipal.FormClosed += VentanaPrincipal_FormClosed;
+                        ventanaPrincipal = new Form1(dni);
+                        ventanaPrincipal.Show();
+                        ventanaPrincipal.FormClosed += VentanaPrincipal_FormClosed;
                     }
                     else
                     {

@@ -15,7 +15,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         ////////////////////  DRIVER //////////////////////
         ////////////////////////////////////////////////////////////
         const String driver = "Data Source=(DESCRIPTION ="
-        + "(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = LOCALHOST)(PORT = 1522)))"
+        + "(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.104)(PORT = 1522)))"
         + "(CONNECT_DATA = (SERVICE_NAME = XE))); "
         + "User Id=ProyectoFinal; Password=123456;";
 
@@ -155,6 +155,21 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             u.ELIMINADO= int.Parse(usersTable.Rows[0][5].ToString());
             return u;
         }
+        public Usuario buscarUsuario(String dni)
+        {
+            Usuario u = new Usuario();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_USUARIO,DNI,NOMBRE,APELLIDO,ID_ROL,ELIMINADO from USUARIOS where DNI like '" + dni + "'", "USUARIOS");
+            usersTable = data.Tables["USUARIOS"];
+            u.Id = int.Parse(usersTable.Rows[0][0].ToString());
+            u.DNI = usersTable.Rows[0][1].ToString();
+            u.NOMBRE = usersTable.Rows[0][2].ToString();
+            u.APELLIDO = usersTable.Rows[0][3].ToString();
+            u.ROL = int.Parse(usersTable.Rows[0][4].ToString());
+            u.ELIMINADO = int.Parse(usersTable.Rows[0][5].ToString());
+            return u;
+        }
         public Boolean buscarUsuarioPorDNI(String dni)
         {
             Boolean encontrado = false;
@@ -209,6 +224,15 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         public void RstaurarUsuario(int idU)
         {
             setData("update USUARIOS set ELIMINADO=" + 0 + " where ID_USUARIO = " + idU + "");
+        }
+        //General
+        public void EliminarRegistro(String tabla,String fila,int id)
+        {
+            setData("update "+tabla+" set ELIMINADO=" + 1 + " where "+fila+" = " + id + "");
+        }
+        public void RestaurarRegistro(String tabla, String fila, int id)
+        {
+            setData("update " + tabla + " set ELIMINADO=" + 0 + " where " + fila + " = " + id + "");
         }
     }
 }

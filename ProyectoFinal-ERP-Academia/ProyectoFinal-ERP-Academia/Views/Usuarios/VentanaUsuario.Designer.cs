@@ -38,22 +38,28 @@
             // 
             // btAgregar
             // 
+            this.btAgregar.BackColor = System.Drawing.Color.White;
+            this.btAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btAgregar.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btAgregar.Location = new System.Drawing.Point(12, 48);
             this.btAgregar.Name = "btAgregar";
             this.btAgregar.Size = new System.Drawing.Size(75, 23);
             this.btAgregar.TabIndex = 0;
             this.btAgregar.Text = "Añadir";
-            this.btAgregar.UseVisualStyleBackColor = true;
+            this.btAgregar.UseVisualStyleBackColor = false;
             this.btAgregar.Click += new System.EventHandler(this.button1_Click);
             // 
             // btMod
             // 
+            this.btMod.BackColor = System.Drawing.Color.White;
+            this.btMod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btMod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btMod.Location = new System.Drawing.Point(93, 48);
             this.btMod.Name = "btMod";
             this.btMod.Size = new System.Drawing.Size(75, 23);
             this.btMod.TabIndex = 1;
             this.btMod.Text = "Modificar";
-            this.btMod.UseVisualStyleBackColor = true;
+            this.btMod.UseVisualStyleBackColor = false;
             this.btMod.Click += new System.EventHandler(this.button2_Click);
             // 
             // tablaUsuarios
@@ -76,35 +82,44 @@
             // 
             // btElim
             // 
+            this.btElim.BackColor = System.Drawing.Color.White;
+            this.btElim.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btElim.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btElim.Location = new System.Drawing.Point(564, 48);
             this.btElim.Name = "btElim";
             this.btElim.Size = new System.Drawing.Size(75, 23);
             this.btElim.TabIndex = 3;
             this.btElim.Text = "Eliminar";
-            this.btElim.UseVisualStyleBackColor = true;
+            this.btElim.UseVisualStyleBackColor = false;
             this.btElim.Click += new System.EventHandler(this.btElim_Click);
             // 
             // btRes
             // 
+            this.btRes.BackColor = System.Drawing.Color.White;
+            this.btRes.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btRes.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btRes.Location = new System.Drawing.Point(645, 48);
             this.btRes.Name = "btRes";
             this.btRes.Size = new System.Drawing.Size(75, 23);
             this.btRes.TabIndex = 4;
             this.btRes.Text = "Restaurar";
-            this.btRes.UseVisualStyleBackColor = true;
+            this.btRes.UseVisualStyleBackColor = false;
             this.btRes.Click += new System.EventHandler(this.btRes_Click);
             // 
             // VentanaUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(730, 408);
             this.Controls.Add(this.btRes);
             this.Controls.Add(this.btElim);
             this.Controls.Add(this.tablaUsuarios);
             this.Controls.Add(this.btMod);
             this.Controls.Add(this.btAgregar);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "VentanaUsuario";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Usuarios";
             ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).EndInit();
             this.ResumeLayout(false);

@@ -100,11 +100,53 @@
     <Compile Include="Util\Clases\Transaccion.cs" />
     <Compile Include="Util\Clases\Usuario.cs" />
     <Compile Include="Util\Encryptor.cs" />
+    <Compile Include="Views\Contabilidad\Abonos\VentanaAbonos.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Abonos\VentanaAbonos.Designer.cs">
+      <DependentUpon>VentanaAbonos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Facturas\CrearFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Facturas\CrearFactura.Designer.cs">
+      <DependentUpon>CrearFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Facturas\ModificarFactura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Facturas\ModificarFactura.Designer.cs">
+      <DependentUpon>ModificarFactura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Facturas\VentanaFacturas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Facturas\VentanaFacturas.Designer.cs">
+      <DependentUpon>VentanaFacturas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Transacciones\VentanaTransacciones.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Contabilidad\Transacciones\VentanaTransacciones.Designer.cs">
+      <DependentUpon>VentanaTransacciones.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EliminarRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\EliminarRegistro.Designer.cs">
+      <DependentUpon>EliminarRegistro.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\InicioSesion.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\InicioSesion.Designer.cs">
       <DependentUpon>InicioSesion.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Matriculas\CrearMatricula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Matriculas\CrearMatricula.Designer.cs">
+      <DependentUpon>CrearMatricula.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Matriculas\VentanaMatriculas.cs">
       <SubType>Form</SubType>
@@ -112,11 +154,35 @@
     <Compile Include="Views\Matriculas\VentanaMatriculas.Designer.cs">
       <DependentUpon>VentanaMatriculas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Organización\Alumnos\AgregarAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Alumnos\AgregarAlumno.Designer.cs">
+      <DependentUpon>AgregarAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Alumnos\ModificarAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Alumnos\ModificarAlumno.Designer.cs">
+      <DependentUpon>ModificarAlumno.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Organización\Alumnos\VentanaAlumnos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Organización\Alumnos\VentanaAlumnos.Designer.cs">
       <DependentUpon>VentanaAlumnos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Asignaturas\AgregarAsignatura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Asignaturas\AgregarAsignatura.Designer.cs">
+      <DependentUpon>AgregarAsignatura.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Asignaturas\ModificarAsignatura.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Asignaturas\ModificarAsignatura.Designer.cs">
+      <DependentUpon>ModificarAsignatura.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Organización\Asignaturas\VentanaAsignaturas.cs">
       <SubType>Form</SubType>
@@ -124,17 +190,71 @@
     <Compile Include="Views\Organización\Asignaturas\VentanaAsignaturas.Designer.cs">
       <DependentUpon>VentanaAsignaturas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Organización\Aulas\AgregarAula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Aulas\AgregarAula.Designer.cs">
+      <DependentUpon>AgregarAula.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Aulas\ModificarAula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Aulas\ModificarAula.Designer.cs">
+      <DependentUpon>ModificarAula.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Organización\Aulas\VentanaAulas.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Organización\Aulas\VentanaAulas.Designer.cs">
       <DependentUpon>VentanaAulas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Organización\GestionarHorario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\GestionarHorario.Designer.cs">
+      <DependentUpon>GestionarHorario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Grupos\AgregarGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Grupos\AgregarGrupo.Designer.cs">
+      <DependentUpon>AgregarGrupo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Grupos\ModificarGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Grupos\ModificarGrupo.Designer.cs">
+      <DependentUpon>ModificarGrupo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Organización\Grupos\VentanaGrupos.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\Organización\Grupos\VentanaGrupos.Designer.cs">
       <DependentUpon>VentanaGrupos.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Horario\AgregarHoras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Horario\AgregarHoras.Designer.cs">
+      <DependentUpon>AgregarHoras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Horario\ModificarHoras.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Horario\ModificarHoras.Designer.cs">
+      <DependentUpon>ModificarHoras.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Organización\Horario\VentanaHorario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Horario\VentanaHorario.Designer.cs">
+      <DependentUpon>VentanaHorario.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RestaurarRegistro.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\RestaurarRegistro.Designer.cs">
+      <DependentUpon>RestaurarRegistro.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\Usuarios\AgregarUsuario.cs">
       <SubType>Form</SubType>
@@ -181,23 +301,122 @@
     <Compile Include="Views\VentanaSalir.Designer.cs">
       <DependentUpon>VentanaSalir.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\AgregarTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\AgregarTest.Designer.cs">
+      <DependentUpon>AgregarTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\ModificarTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\ModificarTest.Designer.cs">
+      <DependentUpon>ModificarTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\VentanaTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\VentanaTest.Designer.cs">
+      <DependentUpon>VentanaTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaHacerTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaHacerTest.Designer.cs">
+      <DependentUpon>VentanaHacerTest.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaHorarioAlumno.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaHorarioAlumno.Designer.cs">
+      <DependentUpon>VentanaHorarioAlumno.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaResultados.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaResultados.Designer.cs">
+      <DependentUpon>VentanaResultados.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaSelecTest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\VentanaSelecTest.Designer.cs">
+      <DependentUpon>VentanaSelecTest.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\Contabilidad\Abonos\VentanaAbonos.resx">
+      <DependentUpon>VentanaAbonos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Contabilidad\Facturas\CrearFactura.resx">
+      <DependentUpon>CrearFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Contabilidad\Facturas\ModificarFactura.resx">
+      <DependentUpon>ModificarFactura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Contabilidad\Facturas\VentanaFacturas.resx">
+      <DependentUpon>VentanaFacturas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Contabilidad\Transacciones\VentanaTransacciones.resx">
+      <DependentUpon>VentanaTransacciones.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\EliminarRegistro.resx">
+      <DependentUpon>EliminarRegistro.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\InicioSesion.resx">
       <DependentUpon>InicioSesion.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Matriculas\VentanaMatriculas.resx">
       <DependentUpon>VentanaMatriculas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Alumnos\AgregarAlumno.resx">
+      <DependentUpon>AgregarAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Alumnos\ModificarAlumno.resx">
+      <DependentUpon>ModificarAlumno.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\Alumnos\VentanaAlumnos.resx">
       <DependentUpon>VentanaAlumnos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Asignaturas\AgregarAsignatura.resx">
+      <DependentUpon>AgregarAsignatura.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Asignaturas\ModificarAsignatura.resx">
+      <DependentUpon>ModificarAsignatura.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\Asignaturas\VentanaAsignaturas.resx">
       <DependentUpon>VentanaAsignaturas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Aulas\AgregarAula.resx">
+      <DependentUpon>AgregarAula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Aulas\ModificarAula.resx">
+      <DependentUpon>ModificarAula.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\Aulas\VentanaAulas.resx">
       <DependentUpon>VentanaAulas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\GestionarHorario.resx">
+      <DependentUpon>GestionarHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Grupos\AgregarGrupo.resx">
+      <DependentUpon>AgregarGrupo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Grupos\ModificarGrupo.resx">
+      <DependentUpon>ModificarGrupo.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\Grupos\VentanaGrupos.resx">
       <DependentUpon>VentanaGrupos.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Horario\AgregarHoras.resx">
+      <DependentUpon>AgregarHoras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Horario\ModificarHoras.resx">
+      <DependentUpon>ModificarHoras.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Horario\VentanaHorario.resx">
+      <DependentUpon>VentanaHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\RestaurarRegistro.resx">
+      <DependentUpon>RestaurarRegistro.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Usuarios\AgregarUsuario.resx">
       <DependentUpon>AgregarUsuario.cs</DependentUpon>
@@ -229,6 +448,21 @@
     <EmbeddedResource Include="Views\VentanaSalir.resx">
       <DependentUpon>VentanaSalir.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\AgregarTest.resx">
+      <DependentUpon>AgregarTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\ModificarTest.resx">
+      <DependentUpon>ModificarTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\VentanaTest.resx">
+      <DependentUpon>VentanaTest.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\VentanaHorarioAlumno.resx">
+      <DependentUpon>VentanaHorarioAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\VentanaSelecTest.resx">
+      <DependentUpon>VentanaSelecTest.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -257,7 +491,6 @@
   <ItemGroup>
     <Folder Include="Recursos\" />
     <Folder Include="Util\Managers\" />
-    <Folder Include="Views\Contabilidad\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

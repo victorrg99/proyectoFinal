@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
+using ProyectoFinal_ERP_Academia.Util.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -76,7 +77,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
                 else
                 {
                     int idU = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[0].Value.ToString());
-                    EliminarUsuario eu = new EliminarUsuario(idU);
+                    EliminarRegistro eu = new EliminarRegistro("USUARIOS","ID_USUARIO",idU);
                     eu.FormClosed += Eu_FormClosed;
                     eu.ShowDialog();
                 }
@@ -104,7 +105,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
                 else
                 {
                     int idU = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[0].Value.ToString());
-                    RestaurarUsuario ru = new RestaurarUsuario(idU);
+                    RestaurarRegistro ru = new RestaurarRegistro("USUARIOS", "ID_USUARIO", idU);
                     ru.FormClosed += Ru_FormClosed;
                     ru.ShowDialog();
                 }
