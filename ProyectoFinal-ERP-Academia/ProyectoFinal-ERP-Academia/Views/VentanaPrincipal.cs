@@ -2,6 +2,9 @@
 using ProyectoFinal_ERP_Academia.Util.Clases;
 using ProyectoFinal_ERP_Academia.Views;
 using ProyectoFinal_ERP_Academia.Views.Matriculas;
+using ProyectoFinal_ERP_Academia.Views.Organización.Alumnos;
+using ProyectoFinal_ERP_Academia.Views.Organización.Asignaturas;
+using ProyectoFinal_ERP_Academia.Views.Organización.Profesores;
 using ProyectoFinal_ERP_Academia.Views.Usuarios;
 using System;
 using System.Collections.Generic;
@@ -20,12 +23,12 @@ namespace ProyectoFinal_ERP_Academia
         Usuario usuarioConectado;
         ConnectOracle co;
         
-        public Form1(String dni)
+        public Form1(String usuario)
         {
             InitializeComponent();
             co = new ConnectOracle();
-            usuarioConectado = co.buscarUsuario(dni);
-            label1.Text = usuarioConectado.NOMBRE+ " "+ usuarioConectado.APELLIDO;
+            usuarioConectado = co.buscarUsuario(usuario);
+            label1.Text = usuarioConectado.USUARIO;
             //usuariosToolStripMenuItem1.Visible;
         }
 
@@ -73,6 +76,30 @@ namespace ProyectoFinal_ERP_Academia
         private void verResultadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void alumnosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAlumnos va = new VentanaAlumnos();
+            va.MdiParent = this;
+            va.Activate();
+            va.Show();
+        }
+
+        private void profesoresToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaProfesor vp = new VentanaProfesor();
+            vp.MdiParent = this;
+            vp.Activate();
+            vp.Show();
+        }
+
+        private void asignaturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAsignaturas vas = new VentanaAsignaturas();
+            vas.MdiParent = this;
+            vas.Activate();
+            vas.Show();
         }
     }
 }

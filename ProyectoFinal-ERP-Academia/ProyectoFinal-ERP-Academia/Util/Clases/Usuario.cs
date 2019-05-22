@@ -9,9 +9,7 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
     class Usuario
     {
         int id;
-        String dni;
-        String nombre;
-        String apellido;
+        String usuario;
         String clave;
         int rol;
         int eliminado;
@@ -20,13 +18,11 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
                 
         }
 
-        public Usuario(int id,String dni, String nombre, String apellido, String clave,int rol,int eliminado)
+        public Usuario(int id,String usuario, String clave,int rol,int eliminado)
         {
 
             this.id=id;
-            this.dni=dni;
-            this.nombre=nombre;
-            this.apellido=apellido;
+            this.usuario = usuario;
             this.clave=clave;
             this.rol=rol;
             this.eliminado=eliminado;
@@ -45,43 +41,18 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
                 id = value;
             }
         }
-        public String DNI
+        public String USUARIO
         {
             get 
             {
-                return dni ;
+                return usuario;
             }
 
             set
             {
-                dni = value;
+                usuario = value;
             }
         }
-        public String NOMBRE 
-        {
-            get
-            {
-                return nombre;
-            }
-
-            set
-            {
-                nombre = value;
-            }
-        }
-        public String APELLIDO
-        {
-            get
-            {
-                return apellido;
-            }
-
-            set
-            {
-                apellido = value;
-            }
-        }
-
         public String CLAVE 
         {
             get

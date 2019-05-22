@@ -14,8 +14,7 @@ namespace ProyectoFinal_ERP_Academia.Views
 {
     public partial class InicioSesion : Form
     {
-        String dni;
-        String nombre;
+        String usuario;
         String clave;
         ConnectOracle co;
         Form1 ventanaPrincipal;
@@ -27,33 +26,24 @@ namespace ProyectoFinal_ERP_Academia.Views
 
         private void btInSes_Click(object sender, EventArgs e)
         {
-            if (!Util.Util.validarDNI(tbDNI.Text))
+            if (!Util.Util.validarNombreApellido(tbUsuario.Text))
             {
-                MessageBox.Show("Formato del DNI inválido");
+                MessageBox.Show("Formato del USUARIO inválido");
             }
             else
             {
-                if (!Util.Util.validarNombreApellido(tbNombre.Text))
+                usuario = tbUsuario.Text;
+                clave = tbClave.Text;
+                Boolean inicioSesion = co.IniciarSesion(usuario, clave);
+                if (inicioSesion)
                 {
-                    MessageBox.Show("Formato del NOMBRE inválido");
+                    ventanaPrincipal = new Form1(usuario);
+                    ventanaPrincipal.Show();
+                    ventanaPrincipal.FormClosed += VentanaPrincipal_FormClosed;
                 }
                 else
                 {
-                    dni = tbDNI.Text;
-                    nombre = tbNombre.Text;
-                    clave = tbClave.Text;
-                    Boolean inicioSesion = co.IniciarSesion(dni, nombre, clave);
-                    if (inicioSesion)
-                    {
-                        ventanaPrincipal = new Form1(dni);
-                        ventanaPrincipal.Show();
-                        ventanaPrincipal.FormClosed += VentanaPrincipal_FormClosed;
-                    }
-                    else
-                    {
-                        MessageBox.Show("Datos Incorrectos - Prueba Otra Vez");
-                    }
-                    
+                    MessageBox.Show("Datos Incorrectos - Prueba Otra Vez");
                 }
             }
         }

@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
+using ProyectoFinal_ERP_Academia.Util;
 using ProyectoFinal_ERP_Academia.Util.Clases;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,8 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
     {
         int idU;
         ConnectOracle co;
-        String dni;
-        String nombre;
-        String apellido;
+        String usuario;
+        String clave;
         int rol;
         public ModificarUsuario(int id)
         {
@@ -28,9 +28,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
             Usuario u = co.buscarUsuario(idU);
             co.getRoles();
             ConnectOracle.RoleList.ForEach(x => this.cbRoles.Items.Add(x.NombreRol));
-            tbDNI.Text = u.DNI;
-            tbNombre.Text = u.NOMBRE;
-            tbApellido.Text = u.APELLIDO;
+            tbUsuario.Text = u.USUARIO;
             cbRoles.SelectedIndex = u.ROL-1;
         }
 
@@ -41,36 +39,20 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-            if (Util.Util.validarDNI(tbDNI.Text))
+            if (Util.Util.validarNombreApellido(tbUsuario.Text))
             {
-                if (Util.Util.validarNombreApellido(tbNombre.Text))
+                if (cbRoles.SelectedIndex >= 0)
                 {
-                    if (Util.Util.validarNombreApellido(tbApellido.Text))
-                    {
-                        if (cbRoles.SelectedIndex >= 0)
-                        {
-                            dni = tbDNI.Text;
-                            nombre = tbNombre.Text;
-                            apellido = tbApellido.Text;
-                            rol = cbRoles.SelectedIndex;
-                            rol += 1;
-                            co.ModificarUsuario(idU,dni, nombre, apellido,rol);
-                            MessageBox.Show("Usuario modificado correctamente");
-                            this.Dispose();
-                        }
-                        else
-                        {
-                            MessageBox.Show("ERROR-Selecciona un rol");
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("ERROR-Formato de apellido incorrecto");
-                    }
+                    usuario = tbUsuario.Text;
+                    rol = cbRoles.SelectedIndex;
+                    rol += 1;
+                    co.ModificarUsuario(idU, usuario, rol);
+                    MessageBox.Show("Usuario modificado correctamente");
+                    this.Dispose();
                 }
                 else
                 {
-                    MessageBox.Show("ERROR-Formato de nombre incorrecto");
+                    MessageBox.Show("ERROR-Selecciona un rol");
                 }
             }
             else
@@ -79,6 +61,11 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
             }
 
 
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            this.Dispose();
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
+using ProyectoFinal_ERP_Academia.Util.Clases;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,18 +12,25 @@ using System.Windows.Forms;
 
 namespace ProyectoFinal_ERP_Academia.Views.Organización.Alumnos
 {
-    public partial class AgregarAlumno : Form
+    public partial class ModificarProfesor : Form
     {
-        int idU;
+        int id;
         String dni;
         String nombre;
         String apellidos;
+        String titulacion;
         ConnectOracle co;
-        public AgregarAlumno(int idUsuario)
+        Profesor pr;
+        public ModificarProfesor(int idA)
         {
             InitializeComponent();
+            this.id = idA;
             co = new ConnectOracle();
-            this.idU = idUsuario;
+            pr = co.buscarProfesor(id);
+            cbDNI.Text = pr.DNI;
+            cbNom.Text = pr.NOMBRE;
+            cbAp.Text = pr.APELLIDO;
+            cbTitu.Text = pr.TITULACION;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -33,12 +41,20 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Alumnos
                 {
                     if (Util.Util.validarNombreApellido(cbAp.Text))
                     {
-                        dni = cbDNI.Text;
-                        nombre = cbNom.Text;
-                        apellidos = cbAp.Text;
-                        co.AgregarAlumno(dni,nombre,apellidos,idU);
-                        MessageBox.Show("Alumno creado correctamente");
-                        this.Dispose();
+                        if (Util.Util.validarDescripcion(cbTitu.Text))
+                        {
+                            dni = cbDNI.Text;
+                            nombre = cbNom.Text;
+                            apellidos = cbAp.Text;
+                            titulacion = cbTitu.Text;
+                            co.ModificarProfesor(id, dni, nombre, apellidos,titulacion);
+                            MessageBox.Show("Profesor modificado correctamente");
+                            this.Dispose();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Formato de Titulación inválido");
+                        }
                     }
                     else
                     {
@@ -55,8 +71,6 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Alumnos
                 MessageBox.Show("Formato de DNI inválido");
             }
 
-
-            
         }
 
         private void button2_Click(object sender, EventArgs e)

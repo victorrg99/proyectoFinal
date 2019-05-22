@@ -69,7 +69,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
             }
             else
             {
-                int elim = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[5].Value.ToString());
+                int elim = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[3].Value.ToString());
                 if (elim == 1)
                 {
                     MessageBox.Show("El usuario seleccionado ya está eliminado");
@@ -97,7 +97,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
             }
             else
             {
-                int elim = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[5].Value.ToString());
+                int elim = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[3].Value.ToString());
                 if (elim == 0)
                 {
                     MessageBox.Show("El usuario seleccionado no está eliminado");

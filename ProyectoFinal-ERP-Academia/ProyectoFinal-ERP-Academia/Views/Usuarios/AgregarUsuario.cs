@@ -1,5 +1,7 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
 using ProyectoFinal_ERP_Academia.Util;
+using ProyectoFinal_ERP_Academia.Views.Organización.Alumnos;
+using ProyectoFinal_ERP_Academia.Views.Organización.Profesores;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,12 +16,9 @@ namespace ProyectoFinal_ERP_Academia.Views
 {
     public partial class AgregarUsuario : Form
     {
-        String dni;
-        String nombre;
-        String apellido;
+        String usuario;
         String clave;
         int rol;
-        Boolean encontradoDNI;
         ConnectOracle co;
         String usuarioCreado;
         public AgregarUsuario()
@@ -28,55 +27,54 @@ namespace ProyectoFinal_ERP_Academia.Views
             co = new ConnectOracle();
             co.getRoles();
             ConnectOracle.RoleList.ForEach(x => this.cbRoles.Items.Add(x.NombreRol));
-            usuarioCreado = "Usuario creado correctamente";
 
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
-
-
-            if (Util.Util.validarDNI(tbDNI.Text))
+            if (Util.Util.validarNombreApellido(tbUsuario.Text))
             {
-                if (!co.buscarUsuarioPorDNI(tbDNI.Text))
+                if (!co.buscarUsuarioPorNombre(tbUsuario.Text))
                 {
-                    if (Util.Util.validarNombreApellido(tbNombre.Text))
+                    if (tbClave.Text != "")
                     {
-                        if (Util.Util.validarNombreApellido(tbApellido.Text))
+                        if (cbRoles.SelectedIndex >= 0)
                         {
-
-                            if (tbClave.Text != "")
+                            usuario = tbUsuario.Text;
+                            clave = Encryptor.MD5Hash(tbClave.Text);
+                            rol = cbRoles.SelectedIndex;
+                            rol += 1;
+                            int idU = co.AgregarUsuario(usuario, clave, rol);
+                            if (rol == 4)
                             {
-                                if (cbRoles.SelectedIndex >= 0)
-                                {
-                                    dni = tbDNI.Text;
-                                    nombre = tbNombre.Text;
-                                    apellido = tbApellido.Text;
-                                    clave = Encryptor.MD5Hash(tbClave.Text);
-                                    rol = cbRoles.SelectedIndex;
-                                    rol += 1;
-                                    co.AgregarUsuario(dni, nombre, apellido, clave, rol);
-                                    MessageBox.Show(usuarioCreado);
-                                    this.Dispose();
-                                }
-                                else
-                                {
-                                    MessageBox.Show("ERROR-Selecciona un rol");
-                                }
+                                AgregarAlumno au = new AgregarAlumno(idU);
+                                au.FormClosed += Au_FormClosed;
+                                au.ShowDialog();
                             }
                             else
                             {
-                                MessageBox.Show("ERROR-La contraseña no puede estar vacía");
+                                if (rol == 3)
+                                {
+                                    AgregarProfesor ap = new AgregarProfesor(idU);
+                                    ap.FormClosed += Ap_FormClosed;
+                                    ap.ShowDialog();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("Usuario creado correctamente");
+                                    this.Dispose();
+                                }
                             }
+                            
                         }
                         else
                         {
-                            MessageBox.Show("ERROR-Formato de apellido incorrecto");
+                            MessageBox.Show("ERROR-Selecciona un rol");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("ERROR-Formato de nombre incorrecto");
+                        MessageBox.Show("ERROR-La contraseña no puede estar vacía");
                     }
                 }
                 else
@@ -91,6 +89,18 @@ namespace ProyectoFinal_ERP_Academia.Views
 
 
 
+        }
+
+        private void Ap_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("Usuario creado correctamente");
+            this.Dispose();
+        }
+
+        private void Au_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            MessageBox.Show("Usuario creado correctamente");
+            this.Dispose();
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)

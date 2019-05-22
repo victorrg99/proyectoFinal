@@ -30,23 +30,19 @@
         {
             this.btnCancelar = new System.Windows.Forms.Button();
             this.btnAgregar = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.tbNombre = new System.Windows.Forms.TextBox();
             this.tbClave = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.cbRoles = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
-            this.tbDNI = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.tbApellido = new System.Windows.Forms.TextBox();
+            this.tbUsuario = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // btnCancelar
             // 
             this.btnCancelar.BackColor = System.Drawing.Color.White;
             this.btnCancelar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnCancelar.Location = new System.Drawing.Point(233, 264);
+            this.btnCancelar.Location = new System.Drawing.Point(236, 184);
             this.btnCancelar.Name = "btnCancelar";
             this.btnCancelar.Size = new System.Drawing.Size(87, 23);
             this.btnCancelar.TabIndex = 0;
@@ -58,7 +54,7 @@
             // 
             this.btnAgregar.BackColor = System.Drawing.Color.White;
             this.btnAgregar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnAgregar.Location = new System.Drawing.Point(14, 264);
+            this.btnAgregar.Location = new System.Drawing.Point(17, 184);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(87, 23);
             this.btnAgregar.TabIndex = 1;
@@ -66,35 +62,18 @@
             this.btnAgregar.UseVisualStyleBackColor = false;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(77, 90);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 13);
-            this.label1.TabIndex = 2;
-            this.label1.Text = "Nombre:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(57, 171);
+            this.label2.Location = new System.Drawing.Point(56, 91);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 13);
             this.label2.TabIndex = 3;
             this.label2.Text = "Contraseña:";
             // 
-            // tbNombre
-            // 
-            this.tbNombre.Location = new System.Drawing.Point(139, 87);
-            this.tbNombre.Name = "tbNombre";
-            this.tbNombre.Size = new System.Drawing.Size(116, 20);
-            this.tbNombre.TabIndex = 4;
-            // 
             // tbClave
             // 
-            this.tbClave.Location = new System.Drawing.Point(139, 168);
+            this.tbClave.Location = new System.Drawing.Point(137, 88);
             this.tbClave.Name = "tbClave";
             this.tbClave.Size = new System.Drawing.Size(116, 20);
             this.tbClave.TabIndex = 5;
@@ -103,7 +82,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(101, 213);
+            this.label3.Location = new System.Drawing.Point(101, 133);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 6;
@@ -113,59 +92,39 @@
             // 
             this.cbRoles.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbRoles.FormattingEnabled = true;
-            this.cbRoles.Location = new System.Drawing.Point(139, 210);
+            this.cbRoles.Location = new System.Drawing.Point(137, 130);
             this.cbRoles.Name = "cbRoles";
-            this.cbRoles.Size = new System.Drawing.Size(140, 21);
+            this.cbRoles.Size = new System.Drawing.Size(116, 21);
             this.cbRoles.TabIndex = 7;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(98, 50);
+            this.label4.Location = new System.Drawing.Point(77, 50);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(33, 13);
+            this.label4.Size = new System.Drawing.Size(54, 13);
             this.label4.TabIndex = 8;
-            this.label4.Text = "DNI:";
+            this.label4.Text = "Usuario:";
             // 
-            // tbDNI
+            // tbUsuario
             // 
-            this.tbDNI.Location = new System.Drawing.Point(139, 47);
-            this.tbDNI.Name = "tbDNI";
-            this.tbDNI.Size = new System.Drawing.Size(116, 20);
-            this.tbDNI.TabIndex = 9;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(77, 130);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(56, 13);
-            this.label5.TabIndex = 10;
-            this.label5.Text = "Apellido:";
-            // 
-            // tbApellido
-            // 
-            this.tbApellido.Location = new System.Drawing.Point(139, 127);
-            this.tbApellido.Name = "tbApellido";
-            this.tbApellido.Size = new System.Drawing.Size(116, 20);
-            this.tbApellido.TabIndex = 11;
+            this.tbUsuario.Location = new System.Drawing.Point(137, 47);
+            this.tbUsuario.Name = "tbUsuario";
+            this.tbUsuario.Size = new System.Drawing.Size(116, 20);
+            this.tbUsuario.TabIndex = 9;
             // 
             // AgregarUsuario
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
-            this.ClientSize = new System.Drawing.Size(335, 295);
-            this.Controls.Add(this.tbApellido);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.tbDNI);
+            this.ClientSize = new System.Drawing.Size(335, 215);
+            this.Controls.Add(this.tbUsuario);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.cbRoles);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.tbClave);
-            this.Controls.Add(this.tbNombre);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.btnAgregar);
             this.Controls.Add(this.btnCancelar);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -182,15 +141,11 @@
 
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Button btnAgregar;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox tbNombre;
         private System.Windows.Forms.TextBox tbClave;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ComboBox cbRoles;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox tbDNI;
-        private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox tbApellido;
+        private System.Windows.Forms.TextBox tbUsuario;
     }
 }

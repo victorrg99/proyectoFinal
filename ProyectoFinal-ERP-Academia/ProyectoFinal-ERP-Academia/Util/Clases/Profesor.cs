@@ -6,29 +6,31 @@ using System.Threading.Tasks;
 
 namespace ProyectoFinal_ERP_Academia.Util.Clases
 {
-    class Alumno
+    class Profesor
     {
+
         int id;
         String dni;
         String nombre;
         String apellido;
+        String titulacion;
         int idUsuario;
         int eliminado;
 
-        public Alumno()
+        public Profesor()
         {
 
         }
 
-        public Alumno(int id, String dni, String nombre, String apellido, int idUsuario, int eliminado)
+        public Profesor(int id, String dni, String nombre, String apellido, String titulacion, int idUsuario, int eliminado)
         {
 
             this.id = id;
             this.dni = dni;
             this.nombre = nombre;
             this.apellido = apellido;
+            this.titulacion = titulacion;
             this.idUsuario = idUsuario;
-
             this.eliminado = eliminado;
 
         }
@@ -82,6 +84,19 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
             }
         }
 
+        public String TITULACION
+        {
+            get
+            {
+                return titulacion;
+            }
+
+            set
+            {
+                titulacion = value;
+            }
+        }
+
         public int USUARIO
         {
             get
@@ -107,5 +122,6 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
                 eliminado = value;
             }
         }
+
     }
 }
