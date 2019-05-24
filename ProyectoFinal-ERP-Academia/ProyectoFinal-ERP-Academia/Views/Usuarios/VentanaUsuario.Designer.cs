@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.btAgregar = new System.Windows.Forms.Button();
-            this.btMod = new System.Windows.Forms.Button();
             this.tablaUsuarios = new System.Windows.Forms.DataGridView();
             this.btElim = new System.Windows.Forms.Button();
             this.btRes = new System.Windows.Forms.Button();
@@ -48,19 +47,6 @@
             this.btAgregar.Text = "Añadir";
             this.btAgregar.UseVisualStyleBackColor = false;
             this.btAgregar.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // btMod
-            // 
-            this.btMod.BackColor = System.Drawing.Color.White;
-            this.btMod.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btMod.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btMod.Location = new System.Drawing.Point(93, 48);
-            this.btMod.Name = "btMod";
-            this.btMod.Size = new System.Drawing.Size(75, 23);
-            this.btMod.TabIndex = 1;
-            this.btMod.Text = "Modificar";
-            this.btMod.UseVisualStyleBackColor = false;
-            this.btMod.Click += new System.EventHandler(this.button2_Click);
             // 
             // tablaUsuarios
             // 
@@ -115,7 +101,6 @@
             this.Controls.Add(this.btRes);
             this.Controls.Add(this.btElim);
             this.Controls.Add(this.tablaUsuarios);
-            this.Controls.Add(this.btMod);
             this.Controls.Add(this.btAgregar);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "VentanaUsuario";
@@ -129,7 +114,6 @@
         #endregion
 
         private System.Windows.Forms.Button btAgregar;
-        private System.Windows.Forms.Button btMod;
         private System.Windows.Forms.DataGridView tablaUsuarios;
         private System.Windows.Forms.Button btElim;
         private System.Windows.Forms.Button btRes;

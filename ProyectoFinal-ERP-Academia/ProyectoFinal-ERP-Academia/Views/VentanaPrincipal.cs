@@ -4,6 +4,7 @@ using ProyectoFinal_ERP_Academia.Views;
 using ProyectoFinal_ERP_Academia.Views.Matriculas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Alumnos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Asignaturas;
+using ProyectoFinal_ERP_Academia.Views.Organización.Aulas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Profesores;
 using ProyectoFinal_ERP_Academia.Views.Usuarios;
 using System;
@@ -23,11 +24,11 @@ namespace ProyectoFinal_ERP_Academia
         Usuario usuarioConectado;
         ConnectOracle co;
         
-        public Form1(String usuario)
+        public Form1(int id)
         {
             InitializeComponent();
             co = new ConnectOracle();
-            usuarioConectado = co.buscarUsuario(usuario);
+            usuarioConectado = co.buscarUsuario(id);
             label1.Text = usuarioConectado.USUARIO;
             //usuariosToolStripMenuItem1.Visible;
         }
@@ -100,6 +101,22 @@ namespace ProyectoFinal_ERP_Academia
             vas.MdiParent = this;
             vas.Activate();
             vas.Show();
+        }
+
+        private void aulasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAulas vau = new VentanaAulas();
+            vau.MdiParent = this;
+            vau.Activate();
+            vau.Show();
+        }
+
+        private void cambiarContraseñaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            CambiarClave cc = new CambiarClave(usuarioConectado.Id);
+            cc.MdiParent = this;
+            cc.Activate();
+            cc.Show();
         }
     }
 }

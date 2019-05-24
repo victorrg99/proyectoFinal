@@ -42,18 +42,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Usuarios
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (tablaUsuarios.RowCount <= 0)
-            {
-                MessageBox.Show("Debes seleccionar una fila primero");
-            }
-            else
-            {
-                int idU = int.Parse(tablaUsuarios.Rows[tablaUsuarios.CurrentRow.Index].Cells[0].Value.ToString());
-                ModificarUsuario mu = new ModificarUsuario(idU);
-                mu.FormClosed += Mu_FormClosed;
-                mu.ShowDialog();
-            }
-            
+                       
         }
 
         private void Mu_FormClosed(object sender, FormClosedEventArgs e)

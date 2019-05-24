@@ -26,6 +26,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         private DataTable alumTable;
         private DataTable profTable;
         private DataTable asigTable;
+        private DataTable aulasTable;
         private static List<Rol> roleTable;
         
 
@@ -114,8 +115,8 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         }
 
         //Inicio de Sesion
-        Boolean inicioSesion = false;
-        public Boolean IniciarSesion(String usuario, String c)
+        int inicioSesion = -1;
+        public int IniciarSesion(String usuario, String c)
         {
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
@@ -124,7 +125,9 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             usersTable = data.Tables["USUARIOS"];
             if (int.Parse(usersTable.Rows[0][0].ToString()) == 1)
             {
-                inicioSesion = true;
+                data = query.getData("Select ID_USUARIO from USUARIOS where UPPER(USUARIO) like upper('" + usuario + "') and  CLAVE = '" + clave + "'", "USUARIOS");
+                usersTable = data.Tables["USUARIOS"];
+                inicioSesion = int.Parse(usersTable.Rows[0][0].ToString());
             }
             return inicioSesion;
         }
@@ -185,6 +188,20 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             return encontrado;
         }
 
+        public Boolean comprobarClaves(int id, String clave)
+        {
+            Boolean encontrado = false;
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select count(ID_USUARIO) from USUARIOS where ID_USUARIO = " + id + " and CLAVE like '"+clave+"'", "USUARIOS");
+            usersTable = data.Tables["USUARIOS"];
+            if (int.Parse(usersTable.Rows[0][0].ToString()) > 0)
+            {
+                encontrado = true;
+            }
+            return encontrado;
+        }
+
 
         public static List<Rol> RoleList
         {
@@ -216,9 +233,9 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             setData("insert into USUARIOS (ID_USUARIO,USUARIO,CLAVE,ID_ROL,ELIMINADO) values(" + iId + ",'" + usuario + "','" + clave + "','" + rol + "',0)");
             return iId;
         }
-        public void ModificarUsuario(int idU, String usuario, int rol)
+        public void ModificarClave(int idU, String clave)
         {
-            setData("update USUARIOS set USUARIO='" + usuario + "',ID_ROL=" + rol + " where ID_USUARIO = "+idU+"");
+            setData("update USUARIOS set CLAVE='" + clave + "' where ID_USUARIO = "+idU+"");
         }
         public void EliminarUsuario(int idU)
         {
@@ -366,6 +383,60 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             return asig;
         }
 
+
+
+        //Aulas
+
+        public DataTable TablaAulas
+        {
+            get { return aulasTable; }
+            set { aulasTable = value; }
+        }
+        public void AgregarAula(String descripcion, int capacidad)
+        {
+            String id = DLookUp("COUNT(id_aula)", "aulas", "").ToString();
+            int iId = int.Parse(id) + 1;
+            setData("insert into AULAS (ID_AULA,NOMBRE,CAPACIDAD_MAXIMA,ELIMINADO) values(" + iId + ",'" + descripcion + "'," + capacidad + ",0)");
+        }
+
+        public void ModificarAula(int idA, String nombre, int capacidad)
+        {
+            setData("update AULAS set NOMBRE = '" + nombre + "', CAPACIDAD_MAXIMA = " + capacidad + " where ID_AULA = " + idA + "");
+        }
+
+        public void LeerTodasAulas()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_AULA,NOMBRE,CAPACIDAD_MAXIMA,ELIMINADO from AULAS order by ID_AULA", "AULAS");
+            aulasTable = data.Tables["AULAS"];
+        }
+
+        public Boolean encontradoAula(String descripcion)
+        {
+            Boolean encontrado = false;
+            int aux = int.Parse(DLookUp("count(id_aula)", "aulas", "upper(nombre) like upper('" + descripcion + "')").ToString());
+            if (aux > 0)
+            {
+                encontrado = true;
+            }
+
+            return encontrado;
+        }
+
+        public Aula buscarAula(int idA)
+        {
+            Aula aula = new Aula();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_AULA,NOMBRE,CAPACIDAD_MAXIMA,ELIMINADO from AULAS where ID_AULA = " + idA + "", "AULAS");
+            aulasTable = data.Tables["AULAS"];
+            aula.Id = int.Parse(aulasTable.Rows[0][0].ToString());
+            aula.NOMBRE = aulasTable.Rows[0][1].ToString();
+            aula.CAPACIDAD = int.Parse(aulasTable.Rows[0][2].ToString());
+            aula.ELIMINADO = int.Parse(aulasTable.Rows[0][3].ToString());
+            return aula;
+        }
 
 
         //General

@@ -34,10 +34,10 @@ namespace ProyectoFinal_ERP_Academia.Views
             {
                 usuario = tbUsuario.Text;
                 clave = tbClave.Text;
-                Boolean inicioSesion = co.IniciarSesion(usuario, clave);
-                if (inicioSesion)
+                int inicioSesion = co.IniciarSesion(usuario, clave);
+                if (inicioSesion != -1)
                 {
-                    ventanaPrincipal = new Form1(usuario);
+                    ventanaPrincipal = new Form1(inicioSesion);
                     ventanaPrincipal.Show();
                     ventanaPrincipal.FormClosed += VentanaPrincipal_FormClosed;
                 }
