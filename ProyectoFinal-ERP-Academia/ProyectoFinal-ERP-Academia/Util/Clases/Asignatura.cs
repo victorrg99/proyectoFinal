@@ -25,6 +25,11 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
             this.eliminado = eliminado;
         }
 
+        public Asignatura(string v)
+        {
+            this.descripcion = v;
+        }
+
         public int Id
         {
             get

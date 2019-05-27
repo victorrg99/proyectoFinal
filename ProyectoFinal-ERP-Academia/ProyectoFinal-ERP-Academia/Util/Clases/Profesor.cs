@@ -16,6 +16,7 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
         String titulacion;
         int idUsuario;
         int eliminado;
+        private string v;
 
         public Profesor()
         {
@@ -33,6 +34,11 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
             this.idUsuario = idUsuario;
             this.eliminado = eliminado;
 
+        }
+
+        public Profesor(string v)
+        {
+            this.nombre = v;
         }
 
         public int Id

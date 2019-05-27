@@ -5,6 +5,7 @@ using ProyectoFinal_ERP_Academia.Views.Matriculas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Alumnos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Asignaturas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Aulas;
+using ProyectoFinal_ERP_Academia.Views.Organización.Grupos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Profesores;
 using ProyectoFinal_ERP_Academia.Views.Usuarios;
 using System;
@@ -117,6 +118,14 @@ namespace ProyectoFinal_ERP_Academia
             cc.MdiParent = this;
             cc.Activate();
             cc.Show();
+        }
+
+        private void gruposToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaGrupos vgs = new VentanaGrupos();
+            vgs.MdiParent = this;
+            vgs.Activate();
+            vgs.Show();
         }
     }
 }

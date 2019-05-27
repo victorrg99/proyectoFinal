@@ -27,8 +27,11 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         private DataTable profTable;
         private DataTable asigTable;
         private DataTable aulasTable;
+        private DataTable gruposTable;
         private static List<Rol> roleTable;
-        
+        private static List<Asignatura> asignatuasTable;
+        private static List<Profesor> profesoresTable;
+
 
 
         ///////////////////////////////////////////////////////////
@@ -436,6 +439,128 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             aula.CAPACIDAD = int.Parse(aulasTable.Rows[0][2].ToString());
             aula.ELIMINADO = int.Parse(aulasTable.Rows[0][3].ToString());
             return aula;
+        }
+
+
+        //Grupos
+
+        public DataTable TablaGrupos
+        {
+            get { return gruposTable; }
+            set { gruposTable = value; }
+        }
+
+        public void LeerTodosGrupos()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO from GRUPOS order by ID_GRUPO", "GRUPOS");
+            gruposTable = data.Tables["GRUPOS"];
+        }
+
+        public Grupo buscarGrupo(int id)
+        {
+            Grupo u = new Grupo();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO from GRUPOS where ID_GRUPO=" + id + "", "GRUPOS");
+            gruposTable = data.Tables["GRUPOS"];
+            u.id = int.Parse(gruposTable.Rows[0][0].ToString());
+            u.nombre = gruposTable.Rows[0][1].ToString();
+            u.idAsig = int.Parse(gruposTable.Rows[0][2].ToString());
+            u.idProf = int.Parse(gruposTable.Rows[0][3].ToString());
+            u.eliminado = int.Parse(gruposTable.Rows[0][4].ToString());
+            return u;
+        }
+        public Grupo buscarGrupos(String nombre)
+        {
+            Grupo u = new Grupo();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO from GRUPOS where NOMBRE like '" + nombre + "'", "GRUPOS");
+            gruposTable = data.Tables["GRUPOS"];
+            u.id = int.Parse(gruposTable.Rows[0][0].ToString());
+            u.nombre = gruposTable.Rows[0][1].ToString();
+            u.idAsig = int.Parse(gruposTable.Rows[0][2].ToString());
+            u.idProf = int.Parse(gruposTable.Rows[0][3].ToString());
+            u.eliminado = int.Parse(gruposTable.Rows[0][4].ToString());
+            return u;
+
+        }
+        public Boolean buscarGrupoPorNombre(String nombre)
+        {
+            Boolean encontrado = false;
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select count(ID_GRUPO) from GRUPOS where NOMBRE like '" + nombre + "'", "GRUPOS");
+            gruposTable = data.Tables["GRUPOS"];
+            if (int.Parse(gruposTable.Rows[0][0].ToString()) > 0)
+            {
+                encontrado = true;
+            }
+            return encontrado;
+        }
+
+        public static List<Asignatura> AsigList
+        {
+            get { return asignatuasTable; }
+            set { asignatuasTable = value; }
+        }
+        public void AddAsignaturas(DataSet data)
+        {
+            List<Asignatura> ps = new List<Asignatura>();
+
+            foreach (DataRow dr in data.Tables["ASIGNATURAS"].Rows)
+            {
+                ps.Add(new Asignatura(dr["NOMBRE"].ToString()));
+            }
+
+            asignatuasTable = ps;
+        }
+        public void getAsignaturas()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT NOMBRE, ID_ASIGNATURA FROM ASIGNATURAS ORDER BY ID_ASIGNATURA", "ASIGNATURAS");
+            AddAsignaturas(data);
+        }
+
+
+        public static List<Profesor> ProfeList
+        {
+            get { return profesoresTable; }
+            set { profesoresTable = value; }
+        }
+        public void AddProfesores(DataSet data)
+        {
+            List<Profesor> ps = new List<Profesor>();
+
+            foreach (DataRow dr in data.Tables["PROFESORES"].Rows)
+            {
+                ps.Add(new Profesor(dr["NOMBRE"].ToString()));
+            }
+
+            profesoresTable = ps;
+        }
+        public void getProfesores()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT NOMBRE, ID_PROFESOR FROM PROFESORES ORDER BY ID_PROFESOR", "PROFESORES");
+            AddProfesores(data);
+        }
+
+
+        public int AgregarGrupo(String nombre,int idAsig, int idProf)
+        {
+            String id = DLookUp("COUNT(id_grupo)", "grupos", "").ToString();
+            int iId = int.Parse(id) + 1;
+            setData("insert into GRUPOS (ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO) values(" + iId + ",'" + nombre + "','" + idAsig + "','"+ idProf + "',0)");
+            return iId;
+        }
+        public void ModificarGrupo(int idG, String nombre, int idAsig, int idProf)
+        {
+            setData("update GRUPOS set NOMBRE='" + nombre + "',ID_ASIGNATURA = '"+ idAsig + "', ID_PROFESOR = '"+ idProf + "' where ID_GRUPO = " + idG + "");
         }
 
 

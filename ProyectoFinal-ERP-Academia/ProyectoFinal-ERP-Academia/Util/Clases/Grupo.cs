@@ -8,5 +8,13 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
 {
     class Grupo
     {
+        public int id { get; set;}
+        public String nombre { get; set; }
+        public int idAsig { get; set; }
+        public int idProf { get; set; }
+        public int eliminado { get; set; }
+
+        public Grupo() { }
+        
     }
 }
