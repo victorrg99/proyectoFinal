@@ -96,8 +96,10 @@
     <Compile Include="Util\Clases\Hora.cs" />
     <Compile Include="Util\Clases\Horario.cs" />
     <Compile Include="Util\Clases\Matricula.cs" />
+    <Compile Include="Util\Clases\Pregunta.cs" />
     <Compile Include="Util\Clases\Profesor.cs" />
     <Compile Include="Util\Clases\Rol.cs" />
+    <Compile Include="Util\Clases\Test.cs" />
     <Compile Include="Util\Clases\Transaccion.cs" />
     <Compile Include="Util\Clases\Usuario.cs" />
     <Compile Include="Util\Encryptor.cs" />
@@ -320,17 +322,35 @@
     <Compile Include="Views\VentanaSalir.Designer.cs">
       <DependentUpon>VentanaSalir.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionPreguntas\AgregarPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionPreguntas\AgregarPregunta.Designer.cs">
+      <DependentUpon>AgregarPregunta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionPreguntas\ModificarPregunta.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionPreguntas\ModificarPregunta.Designer.cs">
+      <DependentUpon>ModificarPregunta.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionPreguntas\VentanaPreguntas.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionPreguntas\VentanaPreguntas.Designer.cs">
+      <DependentUpon>VentanaPreguntas.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\AgregarPreguntasATest.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\ZonaAlumnos\GestionTest\AgregarPreguntasATest.Designer.cs">
+      <DependentUpon>AgregarPreguntasATest.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\ZonaAlumnos\GestionTest\AgregarTest.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Views\ZonaAlumnos\GestionTest\AgregarTest.Designer.cs">
       <DependentUpon>AgregarTest.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ZonaAlumnos\GestionTest\ModificarTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Views\ZonaAlumnos\GestionTest\ModificarTest.Designer.cs">
-      <DependentUpon>ModificarTest.cs</DependentUpon>
     </Compile>
     <Compile Include="Views\ZonaAlumnos\GestionTest\VentanaTest.cs">
       <SubType>Form</SubType>
@@ -476,11 +496,20 @@
     <EmbeddedResource Include="Views\VentanaSalir.resx">
       <DependentUpon>VentanaSalir.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionPreguntas\AgregarPregunta.resx">
+      <DependentUpon>AgregarPregunta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionPreguntas\ModificarPregunta.resx">
+      <DependentUpon>ModificarPregunta.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionPreguntas\VentanaPreguntas.resx">
+      <DependentUpon>VentanaPreguntas.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\AgregarPreguntasATest.resx">
+      <DependentUpon>AgregarPreguntasATest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\AgregarTest.resx">
       <DependentUpon>AgregarTest.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\ModificarTest.resx">
-      <DependentUpon>ModificarTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\VentanaTest.resx">
       <DependentUpon>VentanaTest.cs</DependentUpon>

@@ -8,6 +8,8 @@ using ProyectoFinal_ERP_Academia.Views.Organización.Aulas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Grupos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Profesores;
 using ProyectoFinal_ERP_Academia.Views.Usuarios;
+using ProyectoFinal_ERP_Academia.Views.ZonaAlumnos.GestionPreguntas;
+using ProyectoFinal_ERP_Academia.Views.ZonaAlumnos.GestionTest;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -30,7 +32,7 @@ namespace ProyectoFinal_ERP_Academia
             InitializeComponent();
             co = new ConnectOracle();
             usuarioConectado = co.buscarUsuario(id);
-            label1.Text = usuarioConectado.USUARIO;
+            label1.Text = usuarioConectado.USUARIO;            
             //usuariosToolStripMenuItem1.Visible;
         }
 
@@ -126,6 +128,22 @@ namespace ProyectoFinal_ERP_Academia
             vgs.MdiParent = this;
             vgs.Activate();
             vgs.Show();
+        }
+
+        private void ventanaPreguntasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaPreguntas vp = new VentanaPreguntas();
+            vp.MdiParent = this;
+            vp.Activate();
+            vp.Show();
+        }
+
+        private void ventanaTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaTest vt = new VentanaTest();
+            vt.MdiParent = this;
+            vt.Activate();
+            vt.Show();
         }
     }
 }

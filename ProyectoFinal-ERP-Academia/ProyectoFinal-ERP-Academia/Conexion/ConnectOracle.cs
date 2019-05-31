@@ -8,6 +8,7 @@ using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace ProyectoFinal_ERP_Academia.Conexion
 {
@@ -16,7 +17,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         ////////////////////  DRIVER //////////////////////
         ////////////////////////////////////////////////////////////
         const String driver = "Data Source=(DESCRIPTION ="
-        + "(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = 192.168.1.104)(PORT = 1522)))"
+        + "(ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = LOCALHOST)(PORT = 1522)))"
         + "(CONNECT_DATA = (SERVICE_NAME = XE))); "
         + "User Id=ProyectoFinal; Password=123456;";
 
@@ -28,6 +29,10 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         private DataTable asigTable;
         private DataTable aulasTable;
         private DataTable gruposTable;
+        private DataTable preguntasTable;
+        private DataTable testTable;
+        private DataTable testpregTable;
+        private DataTable transaccionesTable;
         private static List<Rol> roleTable;
         private static List<Asignatura> asignatuasTable;
         private static List<Profesor> profesoresTable;
@@ -563,6 +568,188 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             setData("update GRUPOS set NOMBRE='" + nombre + "',ID_ASIGNATURA = '"+ idAsig + "', ID_PROFESOR = '"+ idProf + "' where ID_GRUPO = " + idG + "");
         }
 
+        //Preguntas
+
+        public DataTable TablaPreguntas
+        {
+            get { return preguntasTable; }
+            set { preguntasTable = value; }
+        }
+
+        public void AgregarPregunta(int idA,String preg,String res1,String res2, String res3, int resC)
+        {
+            String id = DLookUp("COUNT(id_pregunta)", "preguntas", "").ToString();
+            int iId = int.Parse(id) + 1;
+            setData("insert into PREGUNTAS (ID_PREGUNTA,ID_ASIGNATURA,PREGUNTA,RESPUESTA1,RESPUESTA2,RESPUESTA3,RESPUESTA_CORRECTA,ELIMINADO) values(" + iId + ",'" + idA + "','"+preg+"','" + res1 + "','" + res2 + "','" + res3 + "',"+resC+",0)");
+        }
+        public void ModificarPregunta(int idP, int idA, String preg, String res1, String res2, String res3, int resC)
+        {
+            setData("update PREGUNTAS set ID_ASIGNATURA='" + idA + "',PREGUNTA='" + preg + "',RESPUESTA1='" + res1 + "',RESPUESTA2='" + res2 + "',RESPUESTA3='" + res3 + "',RESPUESTA_CORRECTA=" + resC + " where ID_PREGUNTA = " + idP + "");
+        }
+        public void LeerTodasPreguntas()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_PREGUNTA,ID_ASIGNATURA,PREGUNTA,RESPUESTA1,RESPUESTA2,RESPUESTA3,RESPUESTA_CORRECTA,ELIMINADO from PREGUNTAS order by ID_PREGUNTA", "PREGUNTAS");
+            preguntasTable = data.Tables["PREGUNTAS"];
+        }
+
+        public void LeerTodasPreguntasDeAsignatura(int idAsig)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_PREGUNTA,ID_ASIGNATURA,PREGUNTA,RESPUESTA1,RESPUESTA2,RESPUESTA3,RESPUESTA_CORRECTA,ELIMINADO from PREGUNTAS  where ID_ASIGNATURA = "+idAsig+" order by ID_PREGUNTA", "PREGUNTAS");
+            preguntasTable = data.Tables["PREGUNTAS"];
+        }
+
+        public Pregunta buscarPregunta(int idP)
+        {
+            Pregunta pr = new Pregunta();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_PREGUNTA,ID_ASIGNATURA,PREGUNTA,RESPUESTA1,RESPUESTA2,RESPUESTA3,RESPUESTA_CORRECTA,ELIMINADO from PREGUNTAS where ID_PREGUNTA =" + idP + "", "PREGUNTAS");
+            preguntasTable = data.Tables["PREGUNTAS"];
+            pr.idPregunta = int.Parse(preguntasTable.Rows[0][0].ToString());
+            pr.idAsignatura = int.Parse(preguntasTable.Rows[0][1].ToString());
+            pr.pregunta = preguntasTable.Rows[0][2].ToString();
+            pr.respuesta1 = preguntasTable.Rows[0][3].ToString();
+            pr.respuesta2 = preguntasTable.Rows[0][4].ToString();
+            pr.respuesta3 = preguntasTable.Rows[0][5].ToString();
+            pr.resCorrecta = int.Parse(preguntasTable.Rows[0][6].ToString());
+            pr.eliminado = int.Parse(preguntasTable.Rows[0][7].ToString());
+            return pr;
+        }
+
+        //Test
+
+        public DataTable TablaTest
+        {
+            get { return testTable; }
+            set { testTable = value; }
+        }
+
+        public void AgregarTest(int idA, int dif)
+        {
+            String id = DLookUp("COUNT(id_test)", "test", "").ToString();
+            int iId = int.Parse(id) + 1;
+            setData("insert into TEST (ID_TEST,ID_ASIGNATURA,DIFICULTAD,ELIMINADO) values(" + iId + ",'" + idA + "','" + dif + "',0)");
+        }
+        public void ModificarTest(int idT, int idA, int dif)
+        {
+            setData("update TEST set ID_ASIGNATURA='" + idA + "',DIFICULTAD='" + dif + "' where ID_TEST = " + idT + "");
+        }
+        public void LeerTodosTest()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_TEST,ID_ASIGNATURA,DIFICULTAD,ELIMINADO from TEST order by ID_TEST", "TEST");
+            testTable = data.Tables["TEST"];
+        }
+
+        public void LeerTodosTest(int idA)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_TEST,ID_ASIGNATURA,DIFICULTAD,ELIMINADO from TEST where ID_ASIGNATURA = "+idA+" order by ID_TEST", "TEST");
+            testTable = data.Tables["TEST"];
+        }
+
+        public Test buscarTest(int idT)
+        {
+            Test test = new Test();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_TEST,ID_ASIGNATURA,DIFICULTAD,ELIMINADO from TEST where ID_TEST =" + idT + "", "TEST");
+            testTable = data.Tables["TEST"];
+            test.idTest = int.Parse(testTable.Rows[0][0].ToString());
+            test.idAsignatura = int.Parse(testTable.Rows[0][1].ToString());
+            test.dificultad = int.Parse(testTable.Rows[0][2].ToString());
+            test.eliminado = int.Parse(testTable.Rows[0][3].ToString());
+            return test;
+        }
+        //Test-Preguntas ---testpregTable
+
+        public DataTable TablaTestPreg
+        {
+            get { return testpregTable; }
+            set { testpregTable = value; }
+        }
+        public void LeerTodasPreguntasDeTest(int idTest)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_PREGUNTA,ID_ASIGNATURA,PREGUNTA,RESPUESTA1,RESPUESTA2,RESPUESTA3,RESPUESTA_CORRECTA,ELIMINADO from PREGUNTAS  where ID_PREGUNTA IN (SELECT ID_PREGUNTA FROM TEST_PREGUNTAS WHERE ID_TEST = "+idTest+") order by ID_PREGUNTA", "TESTPREG");
+            testpregTable = data.Tables["TESTPREG"];
+        }
+
+        public void AgregarTestPregunta(int idT, int idP)
+        {
+            String id = DLookUp("MAX(id_test_pregunta)", "test_preguntas", "").ToString();
+            if (id == "")
+            {
+                id = "0";
+            }
+            int iId = int.Parse(id) + 1;
+            setData("insert into TEST_PREGUNTAS (ID_TEST_PREGUNTA,ID_TEST,ID_PREGUNTA) values(" + iId + ",'" + idT + "','" + idP + "')");
+        }
+
+        public Boolean BuscarTestPregunta(int idT, int idP)
+        {
+            Boolean res = true;
+            String id = DLookUp("COUNT(id_test_pregunta)", "test_preguntas", "id_test =" + idT + " and id_pregunta = " + idP ).ToString();
+            int iId = int.Parse(id);
+            if (iId == 0)
+            {
+                res = false;
+            }
+            return res;
+        }
+        public Boolean TestCompleto(int idT)
+        {
+            Boolean res = false;
+
+            String id = DLookUp("dificultad", "test", "id_test =" + idT).ToString();
+            int maxCapacidad = int.Parse(id) * 10;
+            String ocupacion = DLookUp("COUNT(id_test)", "test_preguntas", "id_test=" + idT).ToString();
+            int ocu = int.Parse(ocupacion);
+            MessageBox.Show("Capacidad = " + maxCapacidad + " Ocupacion= " + ocu);
+            if (ocu>=maxCapacidad)
+            {
+                res = true;
+            }
+            return res;
+        }
+
+        public void EliminarTestPregunta(int idT, int idP)
+        {
+            String id = DLookUp("id_test_pregunta", "test_preguntas", "id_test =" + idT + " and id_pregunta = " + idP).ToString();
+            int iId = int.Parse(id);
+            setData("DELETE FROM TEST_PREGUNTAS WHERE ID_TEST_PREGUNTA = "+iId+"");
+        }
+
+
+        //Transacciones
+
+        public DataTable TablaTransacciones
+        {
+            get { return transaccionesTable; }
+            set { transaccionesTable = value; }
+        }
+        public void LeerTodasTransacciones()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_TRANSACCION,TIPO,ID_FACTURA,CONCEPTO,CANTIDAD,FECHA from TRANSACIONES order by ID_TRANSACCION", "TRANSACIONES");
+            transaccionesTable = data.Tables["TRANSACIONES"];
+        }
+
+        public void AgregarTransaccion(int tipo, int idF,String conc,float cant)
+        {
+            String id = DLookUp("COUNT(id_transaccion)", "transacciones", "").ToString();
+            int iId = int.Parse(id) + 1;
+            String date = DateTime.Now.ToString("dd'/'MM'/'yyyy - HH:mm:ss");
+            setData("insert into TRANSACCIONES (ID_TRANSACCION,TIPO,ID_FACTURA,CONCEPTO,CANTIDAD,FECHA) values(" + iId + ",'" + tipo + "','" + idF + "','"+conc+"','"+cant+ "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
+        }
 
         //General
         public void EliminarRegistro(String tabla,String fila,int id)

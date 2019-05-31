@@ -28,6 +28,15 @@ namespace ProyectoFinal_ERP_Academia.Util
             }
             return Regex.IsMatch(cadena, "^[a-z-A-Z]{1,199}");
         }
+        public static bool validarRespuestaYPregunta(String cadena)
+        {
+
+            if (cadena.Equals("") || cadena.Trim().Equals("") || cadena.Contains("'"))
+            {
+                return false;
+            }
+            return true;
+        }
         //Método que tomando por parametro una cadena de texto valida si es un DNI con un formato correcto
         public static bool validarDNI(String cadena)
         {
