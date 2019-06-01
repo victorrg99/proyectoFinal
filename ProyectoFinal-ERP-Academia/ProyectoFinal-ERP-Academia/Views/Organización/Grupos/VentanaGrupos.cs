@@ -69,7 +69,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
             }
             else
             {
-                int elim = int.Parse(tablaGrupos.Rows[tablaGrupos.CurrentRow.Index].Cells[4].Value.ToString());
+                int elim = int.Parse(tablaGrupos.Rows[tablaGrupos.CurrentRow.Index].Cells[5].Value.ToString());
                 if (elim == 1)
                 {
                     MessageBox.Show("El registro seleccionado ya está eliminado");
@@ -97,7 +97,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
             }
             else
             {
-                int elim = int.Parse(tablaGrupos.Rows[tablaGrupos.CurrentRow.Index].Cells[4].Value.ToString());
+                int elim = int.Parse(tablaGrupos.Rows[tablaGrupos.CurrentRow.Index].Cells[5].Value.ToString());
                 if (elim == 0)
                 {
                     MessageBox.Show("El registro seleccionado no está eliminado");
@@ -113,6 +113,26 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
         }
 
         private void Ru_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            RefrescarTabla();
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            if (tablaGrupos.RowCount <= 0)
+            {
+                MessageBox.Show("Debes seleccionar una fila primero");
+            }
+            else
+            {
+                int idGrupo = int.Parse(tablaGrupos.Rows[tablaGrupos.CurrentRow.Index].Cells[0].Value.ToString());
+                AgregarAlumnosAGrupo apt = new AgregarAlumnosAGrupo(idGrupo);
+                apt.FormClosed += Apt_FormClosed;
+                apt.ShowDialog();
+            }
+        }
+
+        private void Apt_FormClosed(object sender, FormClosedEventArgs e)
         {
             RefrescarTabla();
         }

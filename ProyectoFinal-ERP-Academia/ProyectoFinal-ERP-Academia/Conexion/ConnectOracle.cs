@@ -32,6 +32,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         private DataTable preguntasTable;
         private DataTable testTable;
         private DataTable testpregTable;
+        private DataTable grupalumnoTable;
         private DataTable transaccionesTable;
         private static List<Rol> roleTable;
         private static List<Asignatura> asignatuasTable;
@@ -459,7 +460,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         {
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO from GRUPOS order by ID_GRUPO", "GRUPOS");
+            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,CAPACIDAD,ELIMINADO from GRUPOS order by ID_GRUPO", "GRUPOS");
             gruposTable = data.Tables["GRUPOS"];
         }
 
@@ -468,13 +469,14 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             Grupo u = new Grupo();
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO from GRUPOS where ID_GRUPO=" + id + "", "GRUPOS");
+            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,CAPACIDAD,ELIMINADO from GRUPOS where ID_GRUPO=" + id + "", "GRUPOS");
             gruposTable = data.Tables["GRUPOS"];
             u.id = int.Parse(gruposTable.Rows[0][0].ToString());
             u.nombre = gruposTable.Rows[0][1].ToString();
             u.idAsig = int.Parse(gruposTable.Rows[0][2].ToString());
             u.idProf = int.Parse(gruposTable.Rows[0][3].ToString());
-            u.eliminado = int.Parse(gruposTable.Rows[0][4].ToString());
+            u.capacidad = int.Parse(gruposTable.Rows[0][4].ToString());
+            u.eliminado = int.Parse(gruposTable.Rows[0][5].ToString());
             return u;
         }
         public Grupo buscarGrupos(String nombre)
@@ -482,7 +484,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             Grupo u = new Grupo();
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO from GRUPOS where NOMBRE like '" + nombre + "'", "GRUPOS");
+            data = query.getData("Select ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,CAPACIDAD,ELIMINADO from GRUPOS where NOMBRE like '" + nombre + "'", "GRUPOS");
             gruposTable = data.Tables["GRUPOS"];
             u.id = int.Parse(gruposTable.Rows[0][0].ToString());
             u.nombre = gruposTable.Rows[0][1].ToString();
@@ -556,16 +558,16 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         }
 
 
-        public int AgregarGrupo(String nombre,int idAsig, int idProf)
+        public int AgregarGrupo(String nombre,int idAsig, int idProf,int capacidad)
         {
             String id = DLookUp("COUNT(id_grupo)", "grupos", "").ToString();
             int iId = int.Parse(id) + 1;
-            setData("insert into GRUPOS (ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,ELIMINADO) values(" + iId + ",'" + nombre + "','" + idAsig + "','"+ idProf + "',0)");
+            setData("insert into GRUPOS (ID_GRUPO,NOMBRE,ID_ASIGNATURA,ID_PROFESOR,CAPACIDAD,ELIMINADO) values(" + iId + ",'" + nombre + "','" + idAsig + "','"+ idProf + "','"+capacidad+"',0)");
             return iId;
         }
-        public void ModificarGrupo(int idG, String nombre, int idAsig, int idProf)
+        public void ModificarGrupo(int idG, String nombre, int idAsig, int idProf,int capacidad)
         {
-            setData("update GRUPOS set NOMBRE='" + nombre + "',ID_ASIGNATURA = '"+ idAsig + "', ID_PROFESOR = '"+ idProf + "' where ID_GRUPO = " + idG + "");
+            setData("update GRUPOS set NOMBRE='" + nombre + "',ID_ASIGNATURA = '"+ idAsig + "', ID_PROFESOR = '"+ idProf + "',CAPACIDAD = '"+capacidad+"' where ID_GRUPO = " + idG + "");
         }
 
         //Preguntas
@@ -712,7 +714,6 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             int maxCapacidad = int.Parse(id) * 10;
             String ocupacion = DLookUp("COUNT(id_test)", "test_preguntas", "id_test=" + idT).ToString();
             int ocu = int.Parse(ocupacion);
-            MessageBox.Show("Capacidad = " + maxCapacidad + " Ocupacion= " + ocu);
             if (ocu>=maxCapacidad)
             {
                 res = true;
@@ -726,6 +727,70 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             int iId = int.Parse(id);
             setData("DELETE FROM TEST_PREGUNTAS WHERE ID_TEST_PREGUNTA = "+iId+"");
         }
+
+
+
+        //GRUPOS-ALUMNOS  grupalumnoTable
+
+        public DataTable TablaGrupAlumno
+        {
+            get { return grupalumnoTable; }
+            set { grupalumnoTable = value; }
+        }
+        public void LeerTodosAlumnosDeGrupo(int idGrupo)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_ALUMNO,DNI,NOMBRE,APELLIDOS,ID_USUARIO,ELIMINADO from ALUMNOS  where ID_ALUMNO IN (SELECT ID_ALUMNO FROM ALUMNOS_GRUPOS WHERE ID_GRUPO = " + idGrupo + ") order by ID_ALUMNO", "GRUPALUMNO");
+            grupalumnoTable = data.Tables["GRUPALUMNO"];
+        }
+
+        public void AgregarAlumnoGrupo(int idA, int idG)
+        {
+            String id = DLookUp("MAX(id_alumno_grupo)", "alumnos_grupos", "").ToString();
+            if (id == "")
+            {
+                id = "0";
+            }
+            int iId = int.Parse(id) + 1;
+            setData("insert into ALUMNOS_GRUPOS (ID_ALUMNO_GRUPO,ID_ALUMNO,ID_GRUPO) values(" + iId + ",'" + idA + "','" + idG + "')");
+        }
+
+        public Boolean BuscarAlumnoGrupo(int idA, int idG)
+        {
+            Boolean res = true;
+            String id = DLookUp("COUNT(id_alumno_grupo)", "alumnos_grupos", "id_alumno =" + idA + " and id_grupo = " + idG).ToString();
+            int iId = int.Parse(id);
+            if (iId == 0)
+            {
+                res = false;
+            }
+            return res;
+        }
+
+        public Boolean GrupoCompleto(int idG)
+        {
+            Boolean res = false;
+
+            String id = DLookUp("capacidad", "grupos", "id_grupo =" + idG).ToString();
+            int maxCapacidad = int.Parse(id);
+            String ocupacion = DLookUp("COUNT(id_grupo)", "alumnos_grupos", "id_grupo=" + idG).ToString();
+            int ocu = int.Parse(ocupacion);
+            if (ocu >= maxCapacidad)
+            {
+                res = true;
+            }
+            return res;
+        }
+
+        public void EliminarAlumnoGrupo(int idA, int idG)
+        {
+            String id = DLookUp("id_alumno_grupo", "alumnos_grupos", "id_alumno =" + idA + " and id_grupo = " + idG).ToString();
+            int iId = int.Parse(id);
+            setData("DELETE FROM ALUMNOS_GRUPOS WHERE ID_ALUMNO_GRUPO = " + iId + "");
+        }
+
+        //
 
 
         //Transacciones

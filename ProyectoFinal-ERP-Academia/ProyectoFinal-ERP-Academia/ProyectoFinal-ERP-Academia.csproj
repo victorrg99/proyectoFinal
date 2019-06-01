@@ -217,6 +217,12 @@
     <Compile Include="Views\Organización\GestionarHorario.Designer.cs">
       <DependentUpon>GestionarHorario.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Organización\Grupos\AgregarAlumnosAGrupo.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\Grupos\AgregarAlumnosAGrupo.Designer.cs">
+      <DependentUpon>AgregarAlumnosAGrupo.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Organización\Grupos\AgregarGrupo.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -435,6 +441,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\GestionarHorario.resx">
       <DependentUpon>GestionarHorario.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\Grupos\AgregarAlumnosAGrupo.resx">
+      <DependentUpon>AgregarAlumnosAGrupo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\Grupos\AgregarGrupo.resx">
       <DependentUpon>AgregarGrupo.cs</DependentUpon>

@@ -18,6 +18,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
         int idA;
         int idP;
         int idG;
+        int cap;
         ConnectOracle co;
         public ModificarGrupo(int idG)
         {
@@ -32,6 +33,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
             cbProf.SelectedIndex = gr.idProf -1;
             this.nombre = gr.nombre;
             tbNom.Text = nombre;
+            numCap.Value = gr.capacidad;
             this.idG = gr.id;
         }
 
@@ -45,12 +47,21 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
                     {
                         if (cbProf.SelectedIndex >= 0)
                         {
-                            nombre = tbNom.Text;
-                            idA = cbAsig.SelectedIndex + 1;
-                            idP = cbProf.SelectedIndex + 1;
-                            co.ModificarGrupo(idG,nombre, idA, idP);
-                            MessageBox.Show("Grupo modificado correctamente");
-                            this.Dispose();
+                            if (Util.Util.isNumeric(int.Parse(numCap.Value.ToString()).ToString()))
+                            {
+                                nombre = tbNom.Text;
+                                idA = cbAsig.SelectedIndex + 1;
+                                idP = cbProf.SelectedIndex + 1;
+                                cap = int.Parse(numCap.Value.ToString());
+                                co.ModificarGrupo(idG, nombre, idA, idP,cap);
+                                MessageBox.Show("Grupo modificado correctamente");
+                                this.Dispose();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Formato de Capacidad inválido");
+                            }
+                            
                         }
                         else
                         {

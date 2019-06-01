@@ -16,6 +16,7 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
         String nombre;
         int idA;
         int idP;
+        int cap;
         ConnectOracle co;
         public AgregarGrupo()
         {
@@ -39,12 +40,21 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Grupos
                     {
                         if (cbProf.SelectedIndex >= 0)
                         {
-                            nombre = tbNom.Text;
-                            idA = cbAsig.SelectedIndex + 1;
-                            idP = cbProf.SelectedIndex + 1;
-                            co.AgregarGrupo(nombre, idA, idP);
-                            MessageBox.Show("Grupo creado correctamente");
-                            this.Dispose();
+                            if (Util.Util.isNumeric(int.Parse(numCap.Value.ToString()).ToString()))
+                            {
+                                nombre = tbNom.Text;
+                                idA = cbAsig.SelectedIndex + 1;
+                                idP = cbProf.SelectedIndex + 1;
+                                cap = int.Parse(numCap.Value.ToString());
+                                co.AgregarGrupo(nombre, idA, idP,cap);
+                                MessageBox.Show("Grupo creado correctamente");
+                                this.Dispose();
+                            }
+                            else
+                            {
+
+                            }
+                            
                         }
                         else
                         {

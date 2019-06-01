@@ -12,6 +12,7 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
         public String nombre { get; set; }
         public int idAsig { get; set; }
         public int idProf { get; set; }
+        public int capacidad { get; set; }
         public int eliminado { get; set; }
 
         public Grupo() { }
