@@ -157,20 +157,23 @@
             // facturasToolStripMenuItem
             // 
             this.facturasToolStripMenuItem.Name = "facturasToolStripMenuItem";
-            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.facturasToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.facturasToolStripMenuItem.Text = "Facturas";
+            this.facturasToolStripMenuItem.Click += new System.EventHandler(this.facturasToolStripMenuItem_Click);
             // 
             // abonosToolStripMenuItem
             // 
             this.abonosToolStripMenuItem.Name = "abonosToolStripMenuItem";
-            this.abonosToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.abonosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.abonosToolStripMenuItem.Text = "Abonos";
+            this.abonosToolStripMenuItem.Click += new System.EventHandler(this.abonosToolStripMenuItem_Click);
             // 
             // transaccionesToolStripMenuItem
             // 
             this.transaccionesToolStripMenuItem.Name = "transaccionesToolStripMenuItem";
-            this.transaccionesToolStripMenuItem.Size = new System.Drawing.Size(149, 22);
+            this.transaccionesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.transaccionesToolStripMenuItem.Text = "Transacciones";
+            this.transaccionesToolStripMenuItem.Click += new System.EventHandler(this.transaccionesToolStripMenuItem_Click);
             // 
             // matrículasToolStripMenuItem
             // 
@@ -183,7 +186,7 @@
             // matrículasToolStripMenuItem1
             // 
             this.matrículasToolStripMenuItem1.Name = "matrículasToolStripMenuItem1";
-            this.matrículasToolStripMenuItem1.Size = new System.Drawing.Size(129, 22);
+            this.matrículasToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.matrículasToolStripMenuItem1.Text = "Matrículas";
             this.matrículasToolStripMenuItem1.Click += new System.EventHandler(this.matrículasToolStripMenuItem1_Click);
             // 

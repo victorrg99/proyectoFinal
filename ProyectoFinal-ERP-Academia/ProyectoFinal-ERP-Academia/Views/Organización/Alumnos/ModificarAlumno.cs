@@ -35,25 +35,32 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Alumnos
         {
             if (Util.Util.validarDNI(cbDNI.Text))
             {
-                if (Util.Util.validarNombreApellido(cbNom.Text))
+                if (!co.ExisteAlumno(cbDNI.Text) || cbDNI.Text == al.DNI)
                 {
-                    if (Util.Util.validarNombreApellido(cbAp.Text))
+                    if (Util.Util.validarNombreApellido(cbNom.Text))
                     {
-                        dni = cbDNI.Text;
-                        nombre = cbNom.Text;
-                        apellidos = cbAp.Text;
-                        co.ModificarAlumno(id,dni, nombre, apellidos);
-                        MessageBox.Show("Alumno modificado correctamente");
-                        this.Dispose();
+                        if (Util.Util.validarNombreApellido(cbAp.Text))
+                        {
+                            dni = cbDNI.Text;
+                            nombre = cbNom.Text;
+                            apellidos = cbAp.Text;
+                            co.ModificarAlumno(id, dni, nombre, apellidos);
+                            MessageBox.Show("Alumno modificado correctamente");
+                            this.Dispose();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Formato de Apellidos inválido");
+                        }
                     }
                     else
                     {
-                        MessageBox.Show("Formato de Apellidos inválido");
+                        MessageBox.Show("Formato de Nombre inválido");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Formato de Nombre inválido");
+                    MessageBox.Show("Ya existe un alumno con ese DNI");
                 }
             }
             else

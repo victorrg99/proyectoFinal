@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.tablaUsuarios = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).BeginInit();
+            this.tablaAbonos = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaAbonos)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -43,23 +43,23 @@
             this.label1.TabIndex = 73;
             this.label1.Text = "ABONOS";
             // 
-            // tablaUsuarios
+            // tablaAbonos
             // 
-            this.tablaUsuarios.AllowUserToAddRows = false;
-            this.tablaUsuarios.AllowUserToDeleteRows = false;
-            this.tablaUsuarios.AllowUserToResizeColumns = false;
-            this.tablaUsuarios.AllowUserToResizeRows = false;
-            this.tablaUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.tablaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaUsuarios.Location = new System.Drawing.Point(12, 77);
-            this.tablaUsuarios.MultiSelect = false;
-            this.tablaUsuarios.Name = "tablaUsuarios";
-            this.tablaUsuarios.ReadOnly = true;
-            this.tablaUsuarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.tablaUsuarios.RowHeadersVisible = false;
-            this.tablaUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tablaUsuarios.Size = new System.Drawing.Size(708, 319);
-            this.tablaUsuarios.TabIndex = 74;
+            this.tablaAbonos.AllowUserToAddRows = false;
+            this.tablaAbonos.AllowUserToDeleteRows = false;
+            this.tablaAbonos.AllowUserToResizeColumns = false;
+            this.tablaAbonos.AllowUserToResizeRows = false;
+            this.tablaAbonos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tablaAbonos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaAbonos.Location = new System.Drawing.Point(12, 77);
+            this.tablaAbonos.MultiSelect = false;
+            this.tablaAbonos.Name = "tablaAbonos";
+            this.tablaAbonos.ReadOnly = true;
+            this.tablaAbonos.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.tablaAbonos.RowHeadersVisible = false;
+            this.tablaAbonos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaAbonos.Size = new System.Drawing.Size(708, 319);
+            this.tablaAbonos.TabIndex = 74;
             // 
             // VentanaAbonos
             // 
@@ -67,13 +67,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(730, 408);
-            this.Controls.Add(this.tablaUsuarios);
+            this.Controls.Add(this.tablaAbonos);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "VentanaAbonos";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaAbonos";
-            ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaAbonos)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,6 +81,6 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView tablaUsuarios;
+        private System.Windows.Forms.DataGridView tablaAbonos;
     }
 }

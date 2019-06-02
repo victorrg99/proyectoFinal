@@ -273,6 +273,17 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             int iId = int.Parse(id) + 1;
             setData("insert into ALUMNOS (ID_ALUMNO,DNI,NOMBRE,APELLIDOS,ID_USUARIO,ELIMINADO) values(" + iId + ",'" + dni + "','" + nombre + "','" + apellidos + "',"+usuario+",0)");
         }
+        public Boolean ExisteAlumno(String dni)
+        {
+            Boolean existe = false;
+            String id = DLookUp("COUNT(id_alumno)", "alumnos", "dni like '"+dni+"'").ToString();
+            int iId = int.Parse(id);
+            if (iId > 0)
+            {
+                existe = true;
+            }
+            return existe;
+        }
         public void ModificarAlumno(int idA, String dni,String nombre,String apellidos)
         {
             setData("update ALUMNOS set DNI='" + dni + "',NOMBRE='" + nombre + "',APELLIDOS='"+apellidos+"' where ID_ALUMNO = " + idA + "");
@@ -329,6 +340,17 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             String id = DLookUp("COUNT(id_profesor)", "profesores", "").ToString();
             int iId = int.Parse(id) + 1;
             setData("insert into PROFESORES (ID_PROFESOR,DNI,NOMBRE,APELLIDOS,TITULACION,ID_USUARIO,ELIMINADO) values(" + iId + ",'" + dni + "','" + nombre + "','" + apellidos + "','"+titulacion+"',"+usuario+",0)");
+        }
+        public Boolean ExisteProfesor(String dni)
+        {
+            Boolean existe = false;
+            String id = DLookUp("COUNT(id_profesor)", "profesores", "dni like '" + dni + "'").ToString();
+            int iId = int.Parse(id);
+            if (iId > 0)
+            {
+                existe = true;
+            }
+            return existe;
         }
         public void ModificarProfesor(int idP, String dni,String nombre,String apellidos, String titulacion)
         {
@@ -867,18 +889,23 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         {
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_FACTURA,CODIGO,FECHA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESSTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO FROM FACTURAS ORDER BY ID_FACTURA", "FACTURAS");
+            data = query.getData("Select ID_FACTURA,CODIGO,FECHA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO FROM FACTURAS ORDER BY ID_FACTURA", "FACTURAS");
             facturasTable = data.Tables["FACTURAS"];
         }
         public void AgregarFactura(int idU,int idA, float cant1)
         {
             String id = DLookUp("COUNT(id_factura)", "facturas", "").ToString();
             int iId = int.Parse(id) + 1;
-            setData("insert into FACTURAS (ID_FACTURA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO) values(" + iId + ",'" + idU + "','" + idA + "','" +cant1 + "','0.21','" + cant1*1.21 + "',0");
+            float imp = float.Parse("0,21");
+            float cant2 = cant1 * (1+imp);
+            
+            setData("insert into FACTURAS (ID_FACTURA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO) values(" + iId + ",'" + idU + "','" + idA + "','" +cant1 + "','"+imp+"','" +cant2.ToString("N2")+ "',0)");
         }
         public void ModificarFactura(int idF,int idU, int idA, float cant1)
         {
-            setData("update FACTURAS set ID_USUARIO = '"+idU+"',ID_ALUMNO='"+idA+"',CANTIDAD_SIN_IMPUESTO='"+cant1+"',CANTIDAD_TOTAL='"+cant1*1.21+"' where ID_FACTURA = '"+idF+"'");
+            float imp = float.Parse("1,21");
+            float cant2 = cant1 * imp;
+            setData("update FACTURAS set ID_USUARIO = '" + idU+ "',ID_ALUMNO='" + idA+ "',CANTIDAD_SIN_IMPUESTO='" + cant1+ "',CANTIDAD_TOTAL='"+ cant2.ToString("N2") +"' where ID_FACTURA = "+ idF);
         }
         public void ConfirmarFactura(int idF)
         {
@@ -888,7 +915,8 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             String codigo = "ING-";
             codigo += DateTime.Now.Year.ToString();
             codigo += "0000"+idF;
-            setData("update FACTURAS set CODIGO = '"+codigo+ "', FECHA = TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'),CONFIRMADO = 1)");
+            setData("update FACTURAS set CODIGO = '"+codigo+ "', FECHA = TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'),CONFIRMADO = 1 where ID_FACTURA = "+idF+"");
+
         }
         public int getConfirmado(int idF)
         {
@@ -902,7 +930,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             Factura f = new Util.Clases.Factura();
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_FACTURA,CODIGO,FECHA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESSTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO FROM FACTURAS ORDER BY ID_FACTURA", "FACTURAS");
+            data = query.getData("Select ID_FACTURA,CODIGO,FECHA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO FROM FACTURAS WHERE ID_FACTURA = "+idF+"", "FACTURAS");
             facturasTable = data.Tables["FACTURAS"];
             f.id = int.Parse(facturasTable.Rows[0][0].ToString()); 
             f.codigo = facturasTable.Rows[0][1].ToString();
@@ -929,8 +957,8 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         {
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_TRANSACCION,TIPO,ID_FACTURA,CONCEPTO,CANTIDAD,FECHA from TRANSACIONES order by ID_TRANSACCION", "TRANSACIONES");
-            transaccionesTable = data.Tables["TRANSACIONES"];
+            data = query.getData("Select ID_TRANSACCION,TIPO,ID_FACTURA,CONCEPTO,CANTIDAD,FECHA from TRANSACCIONES order by ID_TRANSACCION", "TRANSACCIONES");
+            transaccionesTable = data.Tables["TRANSACCIONES"];
         }
 
         public void AgregarTransaccion(int tipo, int idF,String conc,float cant)
@@ -952,7 +980,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         {
             ConnectOracle query = new ConnectOracle();
             DataSet data = new DataSet();
-            data = query.getData("Select ID_ABONO,ID_FACTURA,CANTIDAD,FECHA from TRANSACIONES order by ID_TRANSACCION", "ABONOS");
+            data = query.getData("Select ID_ABONO,ID_FACTURA,CANTIDAD,FECHA from ABONOS order by ID_ABONO", "ABONOS");
             abonosTable = data.Tables["ABONOS"];
         }
 

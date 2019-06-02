@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.label1 = new System.Windows.Forms.Label();
-            this.tablaUsuarios = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).BeginInit();
+            this.tablaTransacciones = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaTransacciones)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -43,23 +43,23 @@
             this.label1.TabIndex = 74;
             this.label1.Text = "TRANSACCIONES";
             // 
-            // tablaUsuarios
+            // tablaTransacciones
             // 
-            this.tablaUsuarios.AllowUserToAddRows = false;
-            this.tablaUsuarios.AllowUserToDeleteRows = false;
-            this.tablaUsuarios.AllowUserToResizeColumns = false;
-            this.tablaUsuarios.AllowUserToResizeRows = false;
-            this.tablaUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.tablaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.tablaUsuarios.Location = new System.Drawing.Point(12, 77);
-            this.tablaUsuarios.MultiSelect = false;
-            this.tablaUsuarios.Name = "tablaUsuarios";
-            this.tablaUsuarios.ReadOnly = true;
-            this.tablaUsuarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
-            this.tablaUsuarios.RowHeadersVisible = false;
-            this.tablaUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.tablaUsuarios.Size = new System.Drawing.Size(708, 319);
-            this.tablaUsuarios.TabIndex = 75;
+            this.tablaTransacciones.AllowUserToAddRows = false;
+            this.tablaTransacciones.AllowUserToDeleteRows = false;
+            this.tablaTransacciones.AllowUserToResizeColumns = false;
+            this.tablaTransacciones.AllowUserToResizeRows = false;
+            this.tablaTransacciones.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tablaTransacciones.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaTransacciones.Location = new System.Drawing.Point(12, 77);
+            this.tablaTransacciones.MultiSelect = false;
+            this.tablaTransacciones.Name = "tablaTransacciones";
+            this.tablaTransacciones.ReadOnly = true;
+            this.tablaTransacciones.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.tablaTransacciones.RowHeadersVisible = false;
+            this.tablaTransacciones.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaTransacciones.Size = new System.Drawing.Size(708, 319);
+            this.tablaTransacciones.TabIndex = 75;
             // 
             // VentanaTransacciones
             // 
@@ -67,13 +67,13 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(730, 408);
-            this.Controls.Add(this.tablaUsuarios);
+            this.Controls.Add(this.tablaTransacciones);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "VentanaTransacciones";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaTransacciones";
-            ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaTransacciones)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -81,6 +81,6 @@
 
         #endregion
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView tablaUsuarios;
+        private System.Windows.Forms.DataGridView tablaTransacciones;
     }
 }

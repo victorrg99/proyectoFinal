@@ -1,6 +1,9 @@
 ﻿using ProyectoFinal_ERP_Academia.Conexion;
 using ProyectoFinal_ERP_Academia.Util.Clases;
 using ProyectoFinal_ERP_Academia.Views;
+using ProyectoFinal_ERP_Academia.Views.Contabilidad.Abonos;
+using ProyectoFinal_ERP_Academia.Views.Contabilidad.Facturas;
+using ProyectoFinal_ERP_Academia.Views.Contabilidad.Transacciones;
 using ProyectoFinal_ERP_Academia.Views.Matriculas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Alumnos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Asignaturas;
@@ -144,6 +147,30 @@ namespace ProyectoFinal_ERP_Academia
             vt.MdiParent = this;
             vt.Activate();
             vt.Show();
+        }
+
+        private void facturasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaFacturas vf = new VentanaFacturas(usuarioConectado.Id);
+            vf.MdiParent = this;
+            vf.Activate();
+            vf.Show();
+        }
+
+        private void abonosToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaAbonos vab = new VentanaAbonos();
+            vab.MdiParent = this;
+            vab.Activate();
+            vab.Show();
+        }
+
+        private void transaccionesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            VentanaTransacciones vts = new VentanaTransacciones();
+            vts.MdiParent = this;
+            vts.Activate();
+            vts.Show();
         }
     }
 }

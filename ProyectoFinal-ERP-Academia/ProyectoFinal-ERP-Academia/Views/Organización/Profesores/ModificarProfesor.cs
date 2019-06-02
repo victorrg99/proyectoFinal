@@ -37,33 +37,40 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización.Alumnos
         {
             if (Util.Util.validarDNI(cbDNI.Text))
             {
-                if (Util.Util.validarNombreApellido(cbNom.Text))
+                if (!co.ExisteProfesor(cbDNI.Text) || cbDNI.Text == pr.DNI)
                 {
-                    if (Util.Util.validarNombreApellido(cbAp.Text))
+                    if (Util.Util.validarNombreApellido(cbNom.Text))
                     {
-                        if (Util.Util.validarDescripcion(cbTitu.Text))
+                        if (Util.Util.validarNombreApellido(cbAp.Text))
                         {
-                            dni = cbDNI.Text;
-                            nombre = cbNom.Text;
-                            apellidos = cbAp.Text;
-                            titulacion = cbTitu.Text;
-                            co.ModificarProfesor(id, dni, nombre, apellidos,titulacion);
-                            MessageBox.Show("Profesor modificado correctamente");
-                            this.Dispose();
+                            if (Util.Util.validarDescripcion(cbTitu.Text))
+                            {
+                                dni = cbDNI.Text;
+                                nombre = cbNom.Text;
+                                apellidos = cbAp.Text;
+                                titulacion = cbTitu.Text;
+                                co.ModificarProfesor(id, dni, nombre, apellidos, titulacion);
+                                MessageBox.Show("Profesor modificado correctamente");
+                                this.Dispose();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Formato de Titulación inválido");
+                            }
                         }
                         else
                         {
-                            MessageBox.Show("Formato de Titulación inválido");
+                            MessageBox.Show("Formato de Apellidos inválido");
                         }
                     }
                     else
                     {
-                        MessageBox.Show("Formato de Apellidos inválido");
+                        MessageBox.Show("Formato de Nombre inválido");
                     }
                 }
                 else
                 {
-                    MessageBox.Show("Formato de Nombre inválido");
+                    MessageBox.Show("Ya existe un profesor con ese DNI");
                 }
             }
             else
