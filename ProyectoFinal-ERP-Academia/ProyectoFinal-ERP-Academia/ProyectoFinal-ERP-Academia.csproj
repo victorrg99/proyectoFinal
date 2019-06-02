@@ -151,6 +151,12 @@
     <Compile Include="Views\Matriculas\CrearMatricula.Designer.cs">
       <DependentUpon>CrearMatricula.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Matriculas\ModificarMatricula.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Matriculas\ModificarMatricula.Designer.cs">
+      <DependentUpon>ModificarMatricula.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Matriculas\VentanaMatriculas.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -409,6 +415,12 @@
     <EmbeddedResource Include="Views\InicioSesion.resx">
       <DependentUpon>InicioSesion.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Matriculas\CrearMatricula.resx">
+      <DependentUpon>CrearMatricula.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\Matriculas\ModificarMatricula.resx">
+      <DependentUpon>ModificarMatricula.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Matriculas\VentanaMatriculas.resx">
       <DependentUpon>VentanaMatriculas.cs</DependentUpon>
     </EmbeddedResource>
@@ -556,7 +568,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Recursos\" />
-    <Folder Include="Util\Managers\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

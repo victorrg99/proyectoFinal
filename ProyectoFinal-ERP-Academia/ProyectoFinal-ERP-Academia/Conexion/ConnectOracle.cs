@@ -34,9 +34,14 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         private DataTable testpregTable;
         private DataTable grupalumnoTable;
         private DataTable transaccionesTable;
+        private DataTable facturasTable;
+        private DataTable matriculasTable;
+        private DataTable abonosTable;
         private static List<Rol> roleTable;
         private static List<Asignatura> asignatuasTable;
         private static List<Profesor> profesoresTable;
+        private static List<Alumno> alumnTable;
+        private static List<Grupo> grupTable;
 
 
 
@@ -295,6 +300,21 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             al.ELIMINADO = int.Parse(alumTable.Rows[0][5].ToString());
             return al;
         }
+        public Alumno buscarAlumno(string dni)
+        {
+            Alumno al = new Alumno();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_ALUMNO,DNI,NOMBRE,APELLIDOS,ID_USUARIO,ELIMINADO from ALUMNOS where DNI like '" + dni + "'", "ALUMNOS");
+            alumTable = data.Tables["ALUMNOS"];
+            al.Id = int.Parse(alumTable.Rows[0][0].ToString());
+            al.DNI = alumTable.Rows[0][1].ToString();
+            al.NOMBRE = alumTable.Rows[0][2].ToString();
+            al.APELLIDO = alumTable.Rows[0][3].ToString();
+            al.USUARIO = int.Parse(alumTable.Rows[0][4].ToString());
+            al.ELIMINADO = int.Parse(alumTable.Rows[0][5].ToString());
+            return al;
+        }
         ////////////////////////////////////////////////////////////
         //Profesor
 
@@ -479,7 +499,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             u.eliminado = int.Parse(gruposTable.Rows[0][5].ToString());
             return u;
         }
-        public Grupo buscarGrupos(String nombre)
+        public Grupo buscarGrupo(String nombre)
         {
             Grupo u = new Grupo();
             ConnectOracle query = new ConnectOracle();
@@ -789,8 +809,113 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             int iId = int.Parse(id);
             setData("DELETE FROM ALUMNOS_GRUPOS WHERE ID_ALUMNO_GRUPO = " + iId + "");
         }
+        //Matriculas
 
-        //
+        public DataTable TablaMatriculas
+        {
+            get { return matriculasTable; }
+            set { matriculasTable = value; }
+        }
+        public void LeerTodasMatriculas()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_MATRICULA,ID_ALUMNO,ID_GRUPO,PRECIO,FECHA_EXPEDICION,ELIMINADO FROM MATRICULAS ORDER BY ID_MATRICULA", "MATRICULAS");
+            matriculasTable = data.Tables["MATRICULAS"];
+        }
+        public float getPrecioGrupo(int idG)
+        {
+            String pr = DLookUp("precio", "asignaturas", "id_asignatura in (select id_asignatura from grupos where id_grupo = '"+idG+"')").ToString();
+            float precio = float.Parse(pr);
+            return precio;
+        }
+        public void AgregarMatricula(int idA, int idG, float precio)
+        {
+            String id = DLookUp("COUNT(id_matricula)", "matriculas", "").ToString();
+            int iId = int.Parse(id) + 1;
+            String date = DateTime.Now.ToString("dd'/'MM'/'yyyy - HH:mm:ss");
+            setData("insert into MATRICULAS (ID_MATRICULA,ID_ALUMNO,ID_GRUPO,PRECIO,FECHA_EXPEDICION,ELIMINADO) values('" + iId + "','" + idA + "','" + idG + "','" + precio + "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'),0)");
+        }
+        public void ModificarMatricula(int idM,int idA,int idG, float precio)
+        {
+            setData("update MATRICULAS set ID_ALUMNO = '"+idA+"',ID_GRUPO='"+idG+"',PRECIO='"+precio+"' where ID_MATRICULA = '"+idM+"'");
+        }
+        public Matricula BuscarMatricula(int idM)
+        {
+            Matricula ma = new Matricula();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_MATRICULA,ID_ALUMNO,ID_GRUPO,PRECIO,FECHA_EXPEDICION,ELIMINADO FROM MATRICULAS WHERE ID_MATRICULA='"+idM+"'", "MATRICULAS");
+            matriculasTable = data.Tables["MATRICULAS"];
+            ma.id = int.Parse(matriculasTable.Rows[0][0].ToString());
+            ma.idAlumno = int.Parse(matriculasTable.Rows[0][1].ToString());
+            ma.idGrupo = int.Parse(matriculasTable.Rows[0][2].ToString());
+            ma.precio = float.Parse(matriculasTable.Rows[0][3].ToString());
+            ma.fecha = matriculasTable.Rows[0][4].ToString();
+            ma.eliminado = int.Parse(matriculasTable.Rows[0][5].ToString());
+            return ma;
+        }
+
+        //Facturas
+
+        public DataTable TablaFacturas
+        {
+            get { return facturasTable; }
+            set { facturasTable = value; }
+        }
+        public void LeerTodasFacturas()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_FACTURA,CODIGO,FECHA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESSTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO FROM FACTURAS ORDER BY ID_FACTURA", "FACTURAS");
+            facturasTable = data.Tables["FACTURAS"];
+        }
+        public void AgregarFactura(int idU,int idA, float cant1)
+        {
+            String id = DLookUp("COUNT(id_factura)", "facturas", "").ToString();
+            int iId = int.Parse(id) + 1;
+            setData("insert into FACTURAS (ID_FACTURA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO) values(" + iId + ",'" + idU + "','" + idA + "','" +cant1 + "','0.21','" + cant1*1.21 + "',0");
+        }
+        public void ModificarFactura(int idF,int idU, int idA, float cant1)
+        {
+            setData("update FACTURAS set ID_USUARIO = '"+idU+"',ID_ALUMNO='"+idA+"',CANTIDAD_SIN_IMPUESTO='"+cant1+"',CANTIDAD_TOTAL='"+cant1*1.21+"' where ID_FACTURA = '"+idF+"'");
+        }
+        public void ConfirmarFactura(int idF)
+        {
+            String id = DLookUp("COUNT(id_transaccion)", "transacciones", "").ToString();
+            int iId = int.Parse(id) + 1;
+            String date = DateTime.Now.ToString("dd'/'MM'/'yyyy - HH:mm:ss");
+            String codigo = "ING-";
+            codigo += DateTime.Now.Year.ToString();
+            codigo += "0000"+idF;
+            setData("update FACTURAS set CODIGO = '"+codigo+ "', FECHA = TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'),CONFIRMADO = 1)");
+        }
+        public int getConfirmado(int idF)
+        {
+            String id = DLookUp("confirmado", "facturas", "id_factura="+idF).ToString();
+            int iId = int.Parse(id);
+            return iId;
+        }
+
+        public Factura buscarFactura(int idF)
+        {
+            Factura f = new Util.Clases.Factura();
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_FACTURA,CODIGO,FECHA,ID_USUARIO,ID_ALUMNO,CANTIDAD_SIN_IMPUESSTO,IMPUESTO,CANTIDAD_TOTAL,CONFIRMADO FROM FACTURAS ORDER BY ID_FACTURA", "FACTURAS");
+            facturasTable = data.Tables["FACTURAS"];
+            f.id = int.Parse(facturasTable.Rows[0][0].ToString()); 
+            f.codigo = facturasTable.Rows[0][1].ToString();
+            f.fecha = facturasTable.Rows[0][2].ToString();
+            f.idUsuario = int.Parse(facturasTable.Rows[0][3].ToString());
+            f.idAlumno = int.Parse(facturasTable.Rows[0][4].ToString());
+            f.cantidadSinImpuesto = float.Parse(facturasTable.Rows[0][5].ToString());
+            f.impuesto = float.Parse(facturasTable.Rows[0][6].ToString());
+            f.cantidadTotal = float.Parse(facturasTable.Rows[0][7].ToString());
+            f.confirmado = int.Parse(facturasTable.Rows[0][8].ToString());
+            return f;
+            
+        }
 
 
         //Transacciones
@@ -816,6 +941,30 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             setData("insert into TRANSACCIONES (ID_TRANSACCION,TIPO,ID_FACTURA,CONCEPTO,CANTIDAD,FECHA) values(" + iId + ",'" + tipo + "','" + idF + "','"+conc+"','"+cant+ "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
         }
 
+        //Abonos abonosTable
+
+        public DataTable TablaAbonos
+        {
+            get { return abonosTable; }
+            set { abonosTable = value; }
+        }
+        public void LeerTodosAbonos()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_ABONO,ID_FACTURA,CANTIDAD,FECHA from TRANSACIONES order by ID_TRANSACCION", "ABONOS");
+            abonosTable = data.Tables["ABONOS"];
+        }
+
+        public void AgregarAbono(int idF,float cant)
+        {
+            String id = DLookUp("COUNT(id_abono)", "abonos", "").ToString();
+            int iId = int.Parse(id) + 1;
+            String date = DateTime.Now.ToString("dd'/'MM'/'yyyy - HH:mm:ss");
+            setData("insert into ABONOS (ID_ABONO,ID_FACTURA,CANTIDAD,FECHA) values(" + iId + ",'" + idF + "','" + cant + "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
+        }
+
+
         //General
         public void EliminarRegistro(String tabla,String fila,int id)
         {
@@ -824,6 +973,55 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         public void RestaurarRegistro(String tabla, String fila, int id)
         {
             setData("update " + tabla + " set ELIMINADO=" + 0 + " where " + fila + " = " + id + "");
+        }
+
+        public static List<Alumno> AlumList
+        {
+            get { return alumnTable; }
+            set { alumnTable = value; }
+        }
+        public void AddAlumnos(DataSet data)
+        {
+            List<Alumno> ps = new List<Alumno>();
+
+            foreach (DataRow dr in data.Tables["ALUMNOS"].Rows)
+            {
+                ps.Add(new Alumno(dr["DNI"].ToString()));
+            }
+
+            alumnTable = ps;
+        }
+        public void getAlumnos()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT DNI, ID_ALUMNO FROM ALUMNOS WHERE ID_ALUMNO IN (SELECT ID_ALUMNO FROM ALUMNOS_GRUPOS) ORDER BY ID_ALUMNO", "ALUMNOS");
+            AddAlumnos(data);
+        }
+
+
+        public static List<Grupo> GrupList
+        {
+            get { return grupTable; }
+            set { grupTable = value; }
+        }
+        public void AddGrupos(DataSet data)
+        {
+            List<Grupo> ps = new List<Grupo>();
+
+            foreach (DataRow dr in data.Tables["GRUPOS"].Rows)
+            {
+                ps.Add(new Grupo(dr["NOMBRE"].ToString()));
+            }
+
+            grupTable = ps;
+        }
+        public void getGrupos(int idA)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT NOMBRE, ID_GRUPO FROM GRUPOS WHERE ID_GRUPO IN(SELECT ID_GRUPO FROM ALUMNOS_GRUPOS WHERE ID_ALUMNO = '"+idA+"') ORDER BY ID_GRUPO", "GRUPOS");
+            AddGrupos(data);
         }
     }
 }

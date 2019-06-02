@@ -32,8 +32,8 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.tablaMatriculas = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaMatriculas)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
@@ -48,6 +48,7 @@
             this.button4.TabIndex = 34;
             this.button4.Text = "Restaurar";
             this.button4.UseVisualStyleBackColor = false;
+            this.button4.Click += new System.EventHandler(this.button4_Click);
             // 
             // button3
             // 
@@ -61,6 +62,7 @@
             this.button3.TabIndex = 33;
             this.button3.Text = "Eliminar";
             this.button3.UseVisualStyleBackColor = false;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // button2
             // 
@@ -74,6 +76,7 @@
             this.button2.TabIndex = 32;
             this.button2.Text = "Modificar";
             this.button2.UseVisualStyleBackColor = false;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -87,14 +90,25 @@
             this.button1.TabIndex = 31;
             this.button1.Text = "Añadir";
             this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // dataGridView1
+            // tablaMatriculas
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 77);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(708, 319);
-            this.dataGridView1.TabIndex = 30;
+            this.tablaMatriculas.AllowUserToAddRows = false;
+            this.tablaMatriculas.AllowUserToDeleteRows = false;
+            this.tablaMatriculas.AllowUserToResizeColumns = false;
+            this.tablaMatriculas.AllowUserToResizeRows = false;
+            this.tablaMatriculas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tablaMatriculas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaMatriculas.Location = new System.Drawing.Point(12, 77);
+            this.tablaMatriculas.MultiSelect = false;
+            this.tablaMatriculas.Name = "tablaMatriculas";
+            this.tablaMatriculas.ReadOnly = true;
+            this.tablaMatriculas.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.tablaMatriculas.RowHeadersVisible = false;
+            this.tablaMatriculas.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaMatriculas.Size = new System.Drawing.Size(708, 319);
+            this.tablaMatriculas.TabIndex = 35;
             // 
             // VentanaMatriculas
             // 
@@ -102,18 +116,18 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(730, 408);
+            this.Controls.Add(this.tablaMatriculas);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "VentanaMatriculas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaMatriculas";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaMatriculas)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -124,6 +138,6 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView tablaMatriculas;
     }
 }

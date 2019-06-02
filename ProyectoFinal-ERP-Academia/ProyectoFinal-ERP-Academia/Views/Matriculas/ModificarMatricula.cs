@@ -12,21 +12,25 @@ using System.Windows.Forms;
 
 namespace ProyectoFinal_ERP_Academia.Views.Matriculas
 {
-    public partial class CrearMatricula : Form
+    public partial class ModificarMatricula : Form
     {
         ConnectOracle co;
         Alumno al;
+        Alumno a;
+        Matricula m;
+        Grupo g;
         int idA;
         int idG;
         float precio;
-        Grupo g;
-        public CrearMatricula()
+        public ModificarMatricula(int idM)
         {
             InitializeComponent();
             co = new ConnectOracle();
+            m = co.BuscarMatricula(idM);
+            a = co.buscarAlumno(m.idAlumno);
             co.getAlumnos();
             ConnectOracle.AlumList.ForEach(x => this.cbAlum.Items.Add(x.DNI));
-            cbAlum.SelectedIndex = 0;
+            cbAlum.SelectedItem = a.DNI;
 
             al = co.buscarAlumno(cbAlum.SelectedItem.ToString());
             co.getGrupos(al.Id);
@@ -52,8 +56,8 @@ namespace ProyectoFinal_ERP_Academia.Views.Matriculas
                     g = co.buscarGrupo(cbGrup.SelectedItem.ToString());
                     idG = g.id;
                     precio = co.getPrecioGrupo(idG);
-                    co.AgregarMatricula(idA,idG,precio);
-                    MessageBox.Show("Matricula creada correctamente");
+                    co.ModificarMatricula(m.id,idA, idG, precio);
+                    MessageBox.Show("Matricula modificada correctamente");
                     this.Dispose();
                 }
                 else

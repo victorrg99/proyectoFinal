@@ -32,8 +32,9 @@
             this.button3 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.button5 = new System.Windows.Forms.Button();
+            this.tablaUsuarios = new System.Windows.Forms.DataGridView();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).BeginInit();
             this.SuspendLayout();
             // 
             // button4
@@ -88,13 +89,36 @@
             this.button1.Text = "Añadir";
             this.button1.UseVisualStyleBackColor = false;
             // 
-            // dataGridView1
+            // button5
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(12, 77);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(708, 319);
-            this.dataGridView1.TabIndex = 40;
+            this.button5.BackColor = System.Drawing.Color.White;
+            this.button5.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button5.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button5.ForeColor = System.Drawing.Color.Black;
+            this.button5.Location = new System.Drawing.Point(174, 48);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(75, 23);
+            this.button5.TabIndex = 45;
+            this.button5.Text = "Rectificar";
+            this.button5.UseVisualStyleBackColor = false;
+            // 
+            // tablaUsuarios
+            // 
+            this.tablaUsuarios.AllowUserToAddRows = false;
+            this.tablaUsuarios.AllowUserToDeleteRows = false;
+            this.tablaUsuarios.AllowUserToResizeColumns = false;
+            this.tablaUsuarios.AllowUserToResizeRows = false;
+            this.tablaUsuarios.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.tablaUsuarios.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.tablaUsuarios.Location = new System.Drawing.Point(12, 77);
+            this.tablaUsuarios.MultiSelect = false;
+            this.tablaUsuarios.Name = "tablaUsuarios";
+            this.tablaUsuarios.ReadOnly = true;
+            this.tablaUsuarios.RowHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
+            this.tablaUsuarios.RowHeadersVisible = false;
+            this.tablaUsuarios.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.tablaUsuarios.Size = new System.Drawing.Size(708, 319);
+            this.tablaUsuarios.TabIndex = 46;
             // 
             // VentanaFacturas
             // 
@@ -102,16 +126,17 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.GradientActiveCaption;
             this.ClientSize = new System.Drawing.Size(730, 408);
+            this.Controls.Add(this.tablaUsuarios);
+            this.Controls.Add(this.button5);
             this.Controls.Add(this.button4);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.dataGridView1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "VentanaFacturas";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "VentanaFacturas";
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tablaUsuarios)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -122,6 +147,7 @@
         private System.Windows.Forms.Button button3;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.DataGridView tablaUsuarios;
     }
 }

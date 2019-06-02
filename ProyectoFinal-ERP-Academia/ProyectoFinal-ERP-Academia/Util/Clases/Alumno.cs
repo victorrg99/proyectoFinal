@@ -33,6 +33,11 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
 
         }
 
+        public Alumno(string v)
+        {
+            this.dni = v;
+        }
+
         public int Id
         {
             get

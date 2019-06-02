@@ -1,6 +1,6 @@
 ﻿namespace ProyectoFinal_ERP_Academia.Views.Matriculas
 {
-    partial class CrearMatricula
+    partial class ModificarMatricula
     {
         /// <summary>
         /// Required designer variable.
@@ -28,13 +28,22 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.cbGrup = new System.Windows.Forms.ComboBox();
             this.label1 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
             this.cbAlum = new System.Windows.Forms.ComboBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.cbGrup = new System.Windows.Forms.ComboBox();
             this.SuspendLayout();
+            // 
+            // cbGrup
+            // 
+            this.cbGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbGrup.FormattingEnabled = true;
+            this.cbGrup.Location = new System.Drawing.Point(113, 79);
+            this.cbGrup.Name = "cbGrup";
+            this.cbGrup.Size = new System.Drawing.Size(121, 21);
+            this.cbGrup.TabIndex = 103;
             // 
             // label1
             // 
@@ -43,7 +52,7 @@
             this.label1.Location = new System.Drawing.Point(39, 80);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(50, 15);
-            this.label1.TabIndex = 96;
+            this.label1.TabIndex = 102;
             this.label1.Text = "Grupo:";
             // 
             // button2
@@ -55,7 +64,7 @@
             this.button2.Location = new System.Drawing.Point(208, 126);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 95;
+            this.button2.TabIndex = 101;
             this.button2.Text = "Cancelar";
             this.button2.UseVisualStyleBackColor = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
@@ -69,8 +78,8 @@
             this.button1.Location = new System.Drawing.Point(12, 126);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 94;
-            this.button1.Text = "Añadir";
+            this.button1.TabIndex = 100;
+            this.button1.Text = "Modificar";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -81,7 +90,7 @@
             this.cbAlum.Location = new System.Drawing.Point(113, 37);
             this.cbAlum.Name = "cbAlum";
             this.cbAlum.Size = new System.Drawing.Size(121, 21);
-            this.cbAlum.TabIndex = 92;
+            this.cbAlum.TabIndex = 99;
             this.cbAlum.SelectedIndexChanged += new System.EventHandler(this.cbAlum_SelectedIndexChanged);
             // 
             // label2
@@ -91,19 +100,10 @@
             this.label2.Location = new System.Drawing.Point(39, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(59, 15);
-            this.label2.TabIndex = 90;
+            this.label2.TabIndex = 98;
             this.label2.Text = "Alumno:";
             // 
-            // cbGrup
-            // 
-            this.cbGrup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbGrup.FormattingEnabled = true;
-            this.cbGrup.Location = new System.Drawing.Point(113, 79);
-            this.cbGrup.Name = "cbGrup";
-            this.cbGrup.Size = new System.Drawing.Size(121, 21);
-            this.cbGrup.TabIndex = 97;
-            // 
-            // CrearMatricula
+            // ModificarMatricula
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -116,20 +116,21 @@
             this.Controls.Add(this.cbAlum);
             this.Controls.Add(this.label2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
-            this.Name = "CrearMatricula";
+            this.Name = "ModificarMatricula";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "CrearMatricula";
+            this.Text = "ModificarMatricula";
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
+
+        private System.Windows.Forms.ComboBox cbGrup;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.ComboBox cbAlum;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.ComboBox cbGrup;
     }
 }
