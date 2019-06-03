@@ -217,6 +217,12 @@
     <Compile Include="Views\Organización\Aulas\VentanaAulas.Designer.cs">
       <DependentUpon>VentanaAulas.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\Organización\EliminarHorario.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\Organización\EliminarHorario.Designer.cs">
+      <DependentUpon>EliminarHorario.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\Organización\GestionarHorario.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -451,6 +457,9 @@
     <EmbeddedResource Include="Views\Organización\Aulas\VentanaAulas.resx">
       <DependentUpon>VentanaAulas.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\Organización\EliminarHorario.resx">
+      <DependentUpon>EliminarHorario.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\Organización\GestionarHorario.resx">
       <DependentUpon>GestionarHorario.cs</DependentUpon>
     </EmbeddedResource>
@@ -535,8 +544,14 @@
     <EmbeddedResource Include="Views\ZonaAlumnos\GestionTest\VentanaTest.resx">
       <DependentUpon>VentanaTest.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\VentanaHacerTest.resx">
+      <DependentUpon>VentanaHacerTest.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\ZonaAlumnos\VentanaHorarioAlumno.resx">
       <DependentUpon>VentanaHorarioAlumno.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\ZonaAlumnos\VentanaResultados.resx">
+      <DependentUpon>VentanaResultados.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Views\ZonaAlumnos\VentanaSelecTest.resx">
       <DependentUpon>VentanaSelecTest.cs</DependentUpon>

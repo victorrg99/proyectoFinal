@@ -17,7 +17,9 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
         public int resCorrecta { get; set; }
         public int eliminado { get; set; }
 
-        public Pregunta() { }
+        public Boolean contestado { get; set; }
+
+        public Pregunta() { contestado = false; }
 
     }
 }

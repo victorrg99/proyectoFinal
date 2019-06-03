@@ -11,13 +11,14 @@ using System.Windows.Forms;
 
 namespace ProyectoFinal_ERP_Academia.Views.Organización
 {
-    public partial class GestionarHorario : Form
+    public partial class EliminarHorario : Form
     {
         ConnectOracle co;
-        public GestionarHorario()
+        public EliminarHorario()
         {
             InitializeComponent();
             co = new ConnectOracle();
+
             cbDia.SelectedIndex = 0;
 
             co.getAulas();
@@ -37,10 +38,9 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización
         }
         public void RefrescarTabla()
         {
-            co.LeerHoras(cbAula.SelectedIndex + 1, cbGrupo.SelectedIndex + 1,cbDia.SelectedItem.ToString());
-            tablaHorasLibres.DataSource = co.TablaHoras;
+            co.LeerHorasOcupadas(cbAula.SelectedIndex + 1, cbGrupo.SelectedIndex + 1, cbDia.SelectedItem.ToString());
+            tablaHorasOcupadas.DataSource = co.TablaHoras;
         }
-
         private void cbAula_SelectedIndexChanged(object sender, EventArgs e)
         {
             RefrescarTabla();
@@ -58,35 +58,17 @@ namespace ProyectoFinal_ERP_Academia.Views.Organización
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (tablaHorasLibres.RowCount <= 0)
+            if (tablaHorasOcupadas.RowCount <= 0)
             {
                 MessageBox.Show("Debes seleccionar una fila primero");
             }
             else
             {
-                if (co.checkGA(cbGrupo.SelectedIndex + 1, cbAula.SelectedIndex + 1))
-                {
-                    int idH = int.Parse(tablaHorasLibres.Rows[tablaHorasLibres.CurrentRow.Index].Cells[0].Value.ToString());
-                    if (co.checkGrupoHorario(cbGrupo.SelectedIndex + 1, idH))
-                    {
-                        co.AgregarGrupoAulaHorario(cbGrupo.SelectedIndex + 1, cbAula.SelectedIndex + 1, idH);
-                        MessageBox.Show("Registro agregado correctamente");
-                        RefrescarTabla();
-                    }
-                    else
-                    {
-                        MessageBox.Show("El grupo seleccionado ya tiene la hora seleccionada asignada en otro aula");
-                    }
-                    
-                    
-                }
-                else
-                {
-                    MessageBox.Show("El aula seleccionada no tiene aforo suficiente para ese grupo");
-                }
+                int idH = int.Parse(tablaHorasOcupadas.Rows[tablaHorasOcupadas.CurrentRow.Index].Cells[0].Value.ToString());
+                co.EliminarGrupoAulaHorario(cbGrupo.SelectedIndex + 1, cbAula.SelectedIndex + 1, idH);
+                MessageBox.Show("Registro eliminado correctamente");
+                RefrescarTabla();
             }
-                
-
         }
     }
 }

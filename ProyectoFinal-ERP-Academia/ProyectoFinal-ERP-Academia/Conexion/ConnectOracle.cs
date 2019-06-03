@@ -31,17 +31,22 @@ namespace ProyectoFinal_ERP_Academia.Conexion
         private DataTable gruposTable;
         private DataTable preguntasTable;
         private DataTable testTable;
+        private DataTable resultadosTable;
         private DataTable testpregTable;
         private DataTable grupalumnoTable;
         private DataTable transaccionesTable;
         private DataTable facturasTable;
         private DataTable matriculasTable;
         private DataTable abonosTable;
+        private DataTable horasTable;
         private static List<Rol> roleTable;
         private static List<Asignatura> asignatuasTable;
         private static List<Profesor> profesoresTable;
         private static List<Alumno> alumnTable;
         private static List<Grupo> grupTable;
+        private static List<Aula> aulaTable;
+        private static List<Pregunta> pregTable;
+
 
 
 
@@ -689,7 +694,7 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             data = query.getData("Select ID_TEST,ID_ASIGNATURA,DIFICULTAD,ELIMINADO from TEST order by ID_TEST", "TEST");
             testTable = data.Tables["TEST"];
         }
-
+        
         public void LeerTodosTest(int idA)
         {
             ConnectOracle query = new ConnectOracle();
@@ -992,6 +997,152 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             setData("insert into ABONOS (ID_ABONO,ID_FACTURA,CANTIDAD,FECHA) values(" + iId + ",'" + idF + "','" + cant + "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
         }
 
+        //Horas
+
+        public DataTable TablaHoras
+        {
+            get { return horasTable; }
+            set { horasTable = value; }
+        }
+        public void LeerHoras(int idA,int idG,String dia)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_HORARIO,DIA,HORA_INICIO,HORA_FIN from HORARIO where ID_HORARIO NOT IN (SELECT ID_HORARIO FROM GRUPOS_AULAS_HORARIOS WHERE ID_AULA = '"+idA+ "' AND ID_HORARIO IN (SELECT ID_HORARIO FROM HORARIO WHERE upper(DIA) like upper('"+dia+"'))) and upper(DIA) like upper('"+dia+"') order by ID_HORARIO", "HORARIO");
+            horasTable = data.Tables["HORARIO"];
+        }
+        public void LeerHorasOcupadas(int idA, int idG, String dia)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("Select ID_HORARIO,DIA,HORA_INICIO,HORA_FIN from HORARIO where ID_HORARIO IN (SELECT ID_HORARIO FROM GRUPOS_AULAS_HORARIOS WHERE ID_AULA = '" + idA + "' AND ID_GRUPO = '" + idG + "' AND ID_HORARIO IN (SELECT ID_HORARIO FROM HORARIO WHERE upper(DIA) like upper('" + dia + "'))) and upper(DIA) like upper('" + dia + "') order by ID_HORARIO", "HORARIO");
+            horasTable = data.Tables["HORARIO"];
+        }
+        public Boolean checkGH()
+        {
+            Boolean posible = true;
+            String a = DLookUp("COUNT(id_aula)", "aulas", "").ToString();
+            int au = int.Parse(a);
+            String g = DLookUp("COUNT(id_grupo)", "grupos", "").ToString();
+            int gr = int.Parse(g);
+            if (au == 0) { posible = false; }
+            if (gr == 0) { posible = false; }
+            return posible;
+        }
+        public Boolean checkGA(int idG,int idA)
+        {
+            Boolean posible = false;
+            String a = DLookUp("CAPACIDAD_MAXIMA", "AULAS", "ID_AULA = '"+idA+"'").ToString();
+            int au = int.Parse(a);
+            String g = DLookUp("CAPACIDAD", "GRUPOS", "ID_GRUPO = '"+idG+"'").ToString();
+            int gr = int.Parse(g);
+            if (au >= gr) { posible = true; }
+            return posible;
+        }
+        public Boolean checkGrupoHorario(int idG, int idH)
+        {
+            Boolean posible = true;
+            String a = DLookUp("COUNT(ID_GRUPO_AULA_HORARIO)", "GRUPOS_AULAS_HORARIOS", "ID_GRUPO = '" + idG + "' AND ID_HORARIO = '"+idH+"'").ToString();
+            int au = int.Parse(a);
+            if (au > 0) { posible = false; }
+            return posible;
+        }
+        public void AgregarGrupoAulaHorario(int idGrupo,int idAula,int idHorario)
+        {
+            String a = DLookUp("MAX(id_grupo_aula_horario)", "grupos_aulas_horarios", "").ToString();
+            if (a == "")
+            {
+                a = "0";
+            }
+            int id = int.Parse(a)+1;
+            setData("insert into GRUPOS_AULAS_HORARIOS (ID_GRUPO_AULA_HORARIO,ID_GRUPO,ID_AULA,ID_HORARIO) values("+id+","+idGrupo+","+ idAula + ","+ idHorario + ")");
+        }
+        public void EliminarGrupoAulaHorario(int idGrupo, int idAula, int idHorario)
+        {
+            String a = DLookUp("id_grupo_aula_horario", "grupos_aulas_horarios", "id_grupo ='"+idGrupo+"' and id_aula ='"+idAula+"' and id_horario = '"+idHorario+"'").ToString();
+            int id = int.Parse(a);
+            setData("delete from GRUPOS_AULAS_HORARIOS where ID_GRUPO_AULA_HORARIO = '"+id+"'");
+        }
+
+        //Hacer Test
+
+        public void LeerTestCompletos()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("select * from test where id_test in(select t.id_test from test t where dificultad*10 = (select count(id_test) from test_preguntas where id_test=t.id_test))", "TEST");
+            testTable = data.Tables["TEST"];
+        }
+
+        public static List<Pregunta> PregList
+        {
+            get { return pregTable; }
+            set { pregTable = value; }
+        }
+        public List<Pregunta> AddPreguntas(DataSet data)
+        {
+            List<Pregunta> ps = new List<Pregunta>();
+
+            foreach (DataRow dr in data.Tables["PREGUNTAS"].Rows)
+            {
+                Pregunta p = new Pregunta();
+                p.idPregunta = int.Parse(dr["ID_PREGUNTA"].ToString());
+                p.pregunta= dr["PREGUNTA"].ToString();
+                p.respuesta1= dr["RESPUESTA1"].ToString();
+                p.respuesta2= dr["RESPUESTA2"].ToString();
+                p.respuesta3= dr["RESPUESTA3"].ToString();
+                p.resCorrecta= int.Parse(dr["RESPUESTA_CORRECTA"].ToString());
+                p.eliminado= int.Parse(dr["ELIMINADO"].ToString());
+                p.idAsignatura= int.Parse(dr["ID_ASIGNATURA"].ToString());
+                ps.Add(p);
+            }
+
+            pregTable = ps;
+            return ps;
+        }
+        public List<Pregunta> getPreguntas(int idT)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("select * from preguntas where id_pregunta in (select id_pregunta from test_preguntas where id_test = '"+idT+"')", "PREGUNTAS");
+            List<Pregunta>  lp = AddPreguntas(data);
+            return lp;
+        }
+
+        //Mostrar Resultados
+
+        public DataTable TablaResultados
+        {
+            get { return resultadosTable; }
+            set { resultadosTable = value; }
+        }
+
+        public void LeerResultadosTestAlumno(int idA)
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = query.getData("select * from resultados where id_alumno = '"+idA+"'", "RESULTADOS");
+            resultadosTable = data.Tables["RESULTADOS"];
+        }
+        public void AñadirResultados(int idT,int idA,int aciertos,int fallos)
+        {
+            int aprobado=0;
+            String a = DLookUp("MAX(id_resultado)", "resultados", "").ToString();
+            if (a == "")
+            {
+                a = "0";
+            }
+            if (aciertos >= fallos)
+            {
+                aprobado = 1;
+            }
+            int id = int.Parse(a);
+
+            String date = DateTime.Now.ToString("dd'/'MM'/'yyyy - HH:mm:ss");
+            setData("insert into RESULTADOS (ID_TEST,ID_ALUMNO,ACIERTOS,FALLOS,APROBADO,FECHA) values ('"+idT+ "','"+idA+ "','"+aciertos+ "','"+fallos+"','"+aprobado+ "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
+        }
+
+        
 
         //General
         public void EliminarRegistro(String tabla,String fila,int id)
@@ -1050,6 +1201,37 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             DataSet data = new DataSet();
             data = getData("SELECT DISTINCT NOMBRE, ID_GRUPO FROM GRUPOS WHERE ID_GRUPO IN(SELECT ID_GRUPO FROM ALUMNOS_GRUPOS WHERE ID_ALUMNO = '"+idA+"') ORDER BY ID_GRUPO", "GRUPOS");
             AddGrupos(data);
+        }
+        public void getGrupos()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT NOMBRE, ID_GRUPO FROM GRUPOS ORDER BY ID_GRUPO", "GRUPOS");
+            AddGrupos(data);
+        }
+
+        public static List<Aula> AulasList
+        {
+            get { return aulaTable; }
+            set { aulaTable = value; }
+        }
+        public void AddAulas(DataSet data)
+        {
+            List<Aula> ps = new List<Aula>();
+
+            foreach (DataRow dr in data.Tables["AULAS"].Rows)
+            {
+                ps.Add(new Aula(dr["NOMBRE"].ToString()));
+            }
+
+            aulaTable = ps;
+        }
+        public void getAulas()
+        {
+            ConnectOracle query = new ConnectOracle();
+            DataSet data = new DataSet();
+            data = getData("SELECT DISTINCT NOMBRE, ID_AULA FROM AULAS ORDER BY ID_AULA", "AULAS");
+            AddAulas(data);
         }
     }
 }

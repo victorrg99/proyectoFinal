@@ -5,6 +5,7 @@ using ProyectoFinal_ERP_Academia.Views.Contabilidad.Abonos;
 using ProyectoFinal_ERP_Academia.Views.Contabilidad.Facturas;
 using ProyectoFinal_ERP_Academia.Views.Contabilidad.Transacciones;
 using ProyectoFinal_ERP_Academia.Views.Matriculas;
+using ProyectoFinal_ERP_Academia.Views.Organización;
 using ProyectoFinal_ERP_Academia.Views.Organización.Alumnos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Asignaturas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Aulas;
@@ -171,6 +172,42 @@ namespace ProyectoFinal_ERP_Academia
             vts.MdiParent = this;
             vts.Activate();
             vts.Show();
+        }
+
+        private void gestionarHorarioToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            
+        }
+
+        private void añadirGruposAAulasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (co.checkGH())
+            {
+                GestionarHorario gh = new GestionarHorario();
+                gh.MdiParent = this;
+                gh.Activate();
+                gh.Show();
+            }
+            else
+            {
+                MessageBox.Show("No hay datos suficientes para gestionar el horario, revisa AULAS y GRUPOS");
+            }
+        }
+
+        private void eliminarGruposDeAulasToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (co.checkGH())
+            {
+                EliminarHorario eh = new EliminarHorario();
+                eh.MdiParent = this;
+                eh.Activate();
+                eh.Show();
+            }
+            else
+            {
+                MessageBox.Show("No hay datos suficientes para gestionar el horario, revisa AULAS y GRUPOS");
+            }
         }
     }
 }

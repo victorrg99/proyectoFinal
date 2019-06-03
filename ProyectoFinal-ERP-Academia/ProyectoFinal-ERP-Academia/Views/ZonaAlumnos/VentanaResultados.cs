@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ProyectoFinal_ERP_Academia.Conexion;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,9 +13,19 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
 {
     public partial class VentanaResultados : Form
     {
-        public VentanaResultados()
+        ConnectOracle co;
+        int idAlum;
+        public VentanaResultados(int idA)
         {
             InitializeComponent();
+            this.idAlum = idA;
+            co = new ConnectOracle();
+            RefrescarTabla();
+        }
+        public void RefrescarTabla()
+        {
+            co.LeerResultadosTestAlumno(idAlum);
+            tablaTestDisponibles.DataSource = co.TablaResultados;
         }
     }
 }

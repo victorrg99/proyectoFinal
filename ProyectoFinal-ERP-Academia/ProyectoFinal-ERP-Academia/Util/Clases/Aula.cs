@@ -13,6 +13,7 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
         String nombre;
         int capacidad;
         int eliminado;
+        private string v;
 
         public Aula()
         {
@@ -24,6 +25,11 @@ namespace ProyectoFinal_ERP_Academia.Util.Clases
             this.nombre = nombre;
             this.capacidad = capacidad;
             this.eliminado = eliminado;
+        }
+
+        public Aula(string v)
+        {
+            this.nombre = v;
         }
 
         public int Id
