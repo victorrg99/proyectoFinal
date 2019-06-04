@@ -39,6 +39,8 @@
             this.ventanaTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.ventanaPreguntasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.gestionarHorarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.añadirGruposAAulasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.eliminarGruposDeAulasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.contabilidadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.facturasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.abonosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -51,12 +53,9 @@
             this.alumnosToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.hacerTestToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.verResultadosToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.horarioToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.salirToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.añadirGruposAAulasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eliminarGruposDeAulasToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -158,6 +157,20 @@
             this.gestionarHorarioToolStripMenuItem.Text = "Gestionar Horario";
             this.gestionarHorarioToolStripMenuItem.Click += new System.EventHandler(this.gestionarHorarioToolStripMenuItem_Click);
             // 
+            // añadirGruposAAulasToolStripMenuItem
+            // 
+            this.añadirGruposAAulasToolStripMenuItem.Name = "añadirGruposAAulasToolStripMenuItem";
+            this.añadirGruposAAulasToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.añadirGruposAAulasToolStripMenuItem.Text = "Añadir Grupos a Aulas";
+            this.añadirGruposAAulasToolStripMenuItem.Click += new System.EventHandler(this.añadirGruposAAulasToolStripMenuItem_Click);
+            // 
+            // eliminarGruposDeAulasToolStripMenuItem
+            // 
+            this.eliminarGruposDeAulasToolStripMenuItem.Name = "eliminarGruposDeAulasToolStripMenuItem";
+            this.eliminarGruposDeAulasToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
+            this.eliminarGruposDeAulasToolStripMenuItem.Text = "Eliminar Grupos de Aulas";
+            this.eliminarGruposDeAulasToolStripMenuItem.Click += new System.EventHandler(this.eliminarGruposDeAulasToolStripMenuItem_Click);
+            // 
             // contabilidadToolStripMenuItem
             // 
             this.contabilidadToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -231,8 +244,7 @@
             // 
             this.alumnosToolStripMenuItem1.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.hacerTestToolStripMenuItem,
-            this.verResultadosToolStripMenuItem,
-            this.horarioToolStripMenuItem});
+            this.verResultadosToolStripMenuItem});
             this.alumnosToolStripMenuItem1.Name = "alumnosToolStripMenuItem1";
             this.alumnosToolStripMenuItem1.Size = new System.Drawing.Size(99, 20);
             this.alumnosToolStripMenuItem1.Text = "Zona-Alumnos";
@@ -240,21 +252,16 @@
             // hacerTestToolStripMenuItem
             // 
             this.hacerTestToolStripMenuItem.Name = "hacerTestToolStripMenuItem";
-            this.hacerTestToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.hacerTestToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.hacerTestToolStripMenuItem.Text = "Hacer Test";
+            this.hacerTestToolStripMenuItem.Click += new System.EventHandler(this.hacerTestToolStripMenuItem_Click);
             // 
             // verResultadosToolStripMenuItem
             // 
             this.verResultadosToolStripMenuItem.Name = "verResultadosToolStripMenuItem";
-            this.verResultadosToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.verResultadosToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.verResultadosToolStripMenuItem.Text = "Resultados";
             this.verResultadosToolStripMenuItem.Click += new System.EventHandler(this.verResultadosToolStripMenuItem_Click);
-            // 
-            // horarioToolStripMenuItem
-            // 
-            this.horarioToolStripMenuItem.Name = "horarioToolStripMenuItem";
-            this.horarioToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
-            this.horarioToolStripMenuItem.Text = "Horario";
             // 
             // salirToolStripMenuItem
             // 
@@ -280,20 +287,6 @@
             this.label2.Size = new System.Drawing.Size(104, 13);
             this.label2.TabIndex = 5;
             this.label2.Text = "Usuario Conectado: ";
-            // 
-            // añadirGruposAAulasToolStripMenuItem
-            // 
-            this.añadirGruposAAulasToolStripMenuItem.Name = "añadirGruposAAulasToolStripMenuItem";
-            this.añadirGruposAAulasToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.añadirGruposAAulasToolStripMenuItem.Text = "Añadir Grupos a Aulas";
-            this.añadirGruposAAulasToolStripMenuItem.Click += new System.EventHandler(this.añadirGruposAAulasToolStripMenuItem_Click);
-            // 
-            // eliminarGruposDeAulasToolStripMenuItem
-            // 
-            this.eliminarGruposDeAulasToolStripMenuItem.Name = "eliminarGruposDeAulasToolStripMenuItem";
-            this.eliminarGruposDeAulasToolStripMenuItem.Size = new System.Drawing.Size(206, 22);
-            this.eliminarGruposDeAulasToolStripMenuItem.Text = "Eliminar Grupos de Aulas";
-            this.eliminarGruposDeAulasToolStripMenuItem.Click += new System.EventHandler(this.eliminarGruposDeAulasToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -341,7 +334,6 @@
         private System.Windows.Forms.ToolStripMenuItem alumnosToolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem hacerTestToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem verResultadosToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem horarioToolStripMenuItem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem cambiarContraseñaToolStripMenuItem;

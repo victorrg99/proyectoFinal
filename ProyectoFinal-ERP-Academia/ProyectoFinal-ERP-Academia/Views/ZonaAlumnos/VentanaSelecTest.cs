@@ -14,10 +14,13 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
     public partial class VentanaSelecTest : Form
     {
         ConnectOracle co;
-        public VentanaSelecTest()
+        int idA;
+        public VentanaSelecTest(int al)
         {
             InitializeComponent();
             co = new ConnectOracle();
+            this.idA = al;
+            MessageBox.Show(""+idA);
             RefrescarTabla();
         }
         public void RefrescarTabla()
@@ -35,7 +38,7 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
             else
             {
                 int idT = int.Parse(tablaTestDisponibles.Rows[tablaTestDisponibles.CurrentRow.Index].Cells[0].Value.ToString());
-                VentanaHacerTest vht = new VentanaHacerTest(idT);
+                VentanaHacerTest vht = new VentanaHacerTest(idT,idA);
                 vht.FormClosed += Vht_FormClosed;
                 vht.ShowDialog();
             }

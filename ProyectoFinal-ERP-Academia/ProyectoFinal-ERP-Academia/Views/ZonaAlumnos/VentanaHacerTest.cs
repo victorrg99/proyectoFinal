@@ -19,8 +19,9 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
         Pregunta p;
         int pos = 0;
         int idTest;
-        int aciertos = 0;
-        int fallos = 0;
+        List<int> respuestas;
+        int acierto = 1;
+        int fallo = 2;
         int idAlum;
         public VentanaHacerTest(int idT,int idA)
         {
@@ -31,6 +32,8 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
             co = new ConnectOracle();
             listaP = co.getPreguntas(idTest);
             p = listaP.ElementAt(pos);
+            respuestas = new List<int>();
+            for (int i = 0; i < listaP.Count;i++) { respuestas.Add(0); }
             ActualizarDatos(p);
         }
         private void ActualizarDatos(Pregunta pr)
@@ -40,49 +43,53 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
             lbB.Text = pr.respuesta2;
             lbC.Text = pr.respuesta3;
             if (pr.contestado == true) { lbContestada.Visible = true; }
+            if (pr.contestado == false) { lbContestada.Visible = false; }
         }
         private void button1_Click(object sender, EventArgs e)
         {
             if (p.resCorrecta == 3)
             {
-                aciertos += 1;
+                respuestas[pos] = acierto;
             }
             else
             {
-                fallos += 1;
+                respuestas[pos] = fallo;
             }
             p.contestado = true;
+            ActualizarDatos(p);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
             if (p.resCorrecta == 2)
             {
-                aciertos += 1;
+                respuestas[pos] = acierto;
             }
             else
             {
-                fallos += 1;
+                respuestas[pos] = fallo;
             }
             p.contestado = true;
+            ActualizarDatos(p);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
             if (p.resCorrecta == 1)
             {
-                aciertos += 1;
+                respuestas[pos] = acierto;
             }
             else
             {
-                fallos += 1;
+                respuestas[pos] = fallo;
             }
             p.contestado = true;
+            ActualizarDatos(p);
         }
 
         private void anterior_Click(object sender, EventArgs e)
         {
-            if (pos >= 0)
+            if (pos > 0)
             {
                 pos -= 1;
                 p = listaP.ElementAt(pos);
@@ -92,7 +99,7 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
 
         private void siguiente_Click(object sender, EventArgs e)
         {
-            if (pos <= listaP.Count)
+            if (pos < listaP.Count-1)
             {
                 pos += 1;
                 p = listaP.ElementAt(pos);
@@ -102,9 +109,20 @@ namespace ProyectoFinal_ERP_Academia.Views.ZonaAlumnos
 
         private void btFin_Click(object sender, EventArgs e)
         {
-            if (aciertos + fallos == listaP.Count())
-            {
+            
 
+            if (!respuestas.Contains(0))
+            {
+                int a = 0;
+                int f = 0;
+                for (int i = 0; i < respuestas.Count; i++)
+                {
+                    if (respuestas.ElementAt(i) == 1) { a++; }
+                    if (respuestas.ElementAt(i) == 2) { f++; }
+                }
+                co.AñadirResultados(idTest,idAlum,a,f);
+                MessageBox.Show("Test finalizado, Aciertos: "+a+" Fallos: "+f);
+                this.Dispose();
             }
             else
             {

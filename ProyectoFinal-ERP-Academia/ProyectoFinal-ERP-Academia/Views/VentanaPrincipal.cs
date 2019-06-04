@@ -12,6 +12,7 @@ using ProyectoFinal_ERP_Academia.Views.Organización.Aulas;
 using ProyectoFinal_ERP_Academia.Views.Organización.Grupos;
 using ProyectoFinal_ERP_Academia.Views.Organización.Profesores;
 using ProyectoFinal_ERP_Academia.Views.Usuarios;
+using ProyectoFinal_ERP_Academia.Views.ZonaAlumnos;
 using ProyectoFinal_ERP_Academia.Views.ZonaAlumnos.GestionPreguntas;
 using ProyectoFinal_ERP_Academia.Views.ZonaAlumnos.GestionTest;
 using System;
@@ -36,8 +37,28 @@ namespace ProyectoFinal_ERP_Academia
             InitializeComponent();
             co = new ConnectOracle();
             usuarioConectado = co.buscarUsuario(id);
-            label1.Text = usuarioConectado.USUARIO;            
-            //usuariosToolStripMenuItem1.Visible;
+            label1.Text = usuarioConectado.USUARIO;
+            int r = usuarioConectado.ROL;
+            if (r == 2)
+            {
+                alumnosToolStripMenuItem1.Visible = false;
+                usuariosToolStripMenuItem1.Visible = false;
+            }
+            if (r == 3)
+            {
+                organizaciónToolStripMenuItem.Visible = false;
+                contabilidadToolStripMenuItem.Visible = false;
+                matrículasToolStripMenuItem.Visible = false;
+                usuariosToolStripMenuItem1.Visible = false;
+                alumnosToolStripMenuItem1.Visible = false;
+            }
+            if (r == 4)
+            {
+                organizaciónToolStripMenuItem.Visible = false;
+                contabilidadToolStripMenuItem.Visible = false;
+                matrículasToolStripMenuItem.Visible = false;
+                usuariosToolStripMenuItem1.Visible = false;
+            }      
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -83,7 +104,15 @@ namespace ProyectoFinal_ERP_Academia
 
         private void verResultadosToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            int id = co.getIdAlum(usuarioConectado.Id);
+            if (id != -1)
+            {
+                VentanaResultados vres = new VentanaResultados(id);
+                vres.MdiParent = this;
+                vres.Activate();
+                vres.Show();
+            }
+            else { MessageBox.Show("Solo los alumnos y el ususario ADMIN pueden acceder aqui"); }
         }
 
         private void alumnosToolStripMenuItem_Click(object sender, EventArgs e)
@@ -208,6 +237,19 @@ namespace ProyectoFinal_ERP_Academia
             {
                 MessageBox.Show("No hay datos suficientes para gestionar el horario, revisa AULAS y GRUPOS");
             }
+        }
+
+        private void hacerTestToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            int id = co.getIdAlum(usuarioConectado.Id);
+            if (id != -1)
+            {
+                VentanaSelecTest vst = new VentanaSelecTest(id);
+                vst.MdiParent = this;
+                vst.Activate();
+                vst.Show();
+            }
+            else { MessageBox.Show("Solo los alumnos y el ususario ADMIN pueden acceder aqui"); }
         }
     }
 }

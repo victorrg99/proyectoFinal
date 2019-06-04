@@ -1136,15 +1136,26 @@ namespace ProyectoFinal_ERP_Academia.Conexion
             {
                 aprobado = 1;
             }
-            int id = int.Parse(a);
+            int id = int.Parse(a)+1;
 
             String date = DateTime.Now.ToString("dd'/'MM'/'yyyy - HH:mm:ss");
-            setData("insert into RESULTADOS (ID_TEST,ID_ALUMNO,ACIERTOS,FALLOS,APROBADO,FECHA) values ('"+idT+ "','"+idA+ "','"+aciertos+ "','"+fallos+"','"+aprobado+ "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
+            setData("insert into RESULTADOS (ID_RESULTADO,ID_TEST,ID_ALUMNO,ACIERTOS,FALLOS,APROBADO,FECHA) values ('"+id+"','"+idT+ "','"+idA+ "','"+aciertos+ "','"+fallos+"','"+aprobado+ "',TO_DATE('" + date + "', 'DD/MM/YYYY - HH24:MI:SS'))");
         }
 
-        
+
 
         //General
+        public int getIdAlum(int idU)
+        {
+            String a = DLookUp("id_alumno", "alumnos", "id_usuario = '"+idU+"'").ToString();
+            if (a == "")
+            {
+                a = "0";
+            }
+            int id = int.Parse(a);
+            return id;
+        }
+
         public void EliminarRegistro(String tabla,String fila,int id)
         {
             setData("update "+tabla+" set ELIMINADO=" + 1 + " where "+fila+" = " + id + "");
